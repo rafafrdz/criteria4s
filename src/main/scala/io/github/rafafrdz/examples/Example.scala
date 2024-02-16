@@ -1,11 +1,12 @@
-package io.github.rafafrdz
+package io.github.rafafrdz.examples
 
 import io.github.rafafrdz.criterial.core.Criterial
 import io.github.rafafrdz.criterial.functions._
+import io.github.rafafrdz.examples.datastores.Postgres
 
 object Example extends App {
 
-  val d: Criterial[Postgres] = or(and(lt(col("a"), lit(3)), lt(col("b"), lit(4))), lit("c"))
+  val d: Criterial[Postgres] = or(and(lt(col("a"), lit(3)), lt(col("b"), lit(4))), bool(true))
 
   val example: Criterial[Postgres] =
     or(

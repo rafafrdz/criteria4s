@@ -9,7 +9,7 @@ trait Criterial[T <: CriterialTag] {
 }
 
 object Criterial {
-  def value[T <: CriterialTag](v: String): Criterial[T] = new Criterial[T] {
+  def pure[T <: CriterialTag](v: String): Criterial[T] = new Criterial[T] {
 
     override def value: String = v
   }

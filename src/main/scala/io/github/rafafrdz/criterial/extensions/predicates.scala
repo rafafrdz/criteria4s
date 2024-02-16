@@ -1,27 +1,36 @@
 package io.github.rafafrdz.criterial.extensions
 
-import io.github.rafafrdz.criterial.core.Criterial
 import io.github.rafafrdz.criterial.core.Criterial.CriterialTag
-import io.github.rafafrdz.criterial.core.CriterialPred._
+import io.github.rafafrdz.criterial.core.CriterialPredOp._
+import io.github.rafafrdz.criterial.core.{Criterial, CriterialRef}
 import io.github.rafafrdz.criterial.{functions => F}
 
 trait predicates {
 
-  implicit class CriterialPredImplicit[T <: CriterialTag](c: Criterial[T]) {
-    def lt[M <: CriterialTag: LT](other: Criterial[M]): Criterial[M] = F.lt(c, other)
-    def gt[M <: CriterialTag: GT](other: Criterial[M]): Criterial[M] = F.gt(c, other)
-    def leq[M <: CriterialTag: LEQ](other: Criterial[M]): Criterial[M] = F.leq(c, other)
-    def geq[M <: CriterialTag: GEQ](other: Criterial[M]): Criterial[M] = F.geq(c, other)
-    def ===[M <: CriterialTag: EQ](other: Criterial[M]): Criterial[M] = F.===(c, other)
-    def =!=[M <: CriterialTag: NEQ](other: Criterial[M]): Criterial[M] = F.=!=(c, other)
-    def like[M <: CriterialTag: LIKE](other: Criterial[M]): Criterial[M] = F.like(c, other)
-    def like[M <: CriterialTag: LIKE](other: Criterial[M]): Criterial[M] = F.like(c, other)
-    def in[M <: CriterialTag: IN](other: Criterial[M]): Criterial[M] = F.in(c, other)
-    def notin[M <: CriterialTag: NOTIN](other: Criterial[M]): Criterial[M] = F.notin(c, other)
-    def isNull[M <: CriterialTag: ISNULL]: Criterial[M] = F.isNull(c)
-    def isNotNull[M <: CriterialTag: ISNOTNULL]: Criterial[M] = F.isNotNull(c)
-    def between[M <: CriterialTag: BETWEEN](other: Criterial[M]): Criterial[M] = F.between(c, other)
-    def notBetween[M <: CriterialTag: NOTBETWEEN](other: Criterial[M]): Criterial[M] = F.notBetween(c, other)
+  implicit class CriterialPredImplicit[T <: CriterialTag](c: CriterialRef[T]) {
+    def lt(other: CriterialRef[T])(implicit H: LT[T]): Criterial[T] = F.lt(c, other)
+    def gt(other: CriterialRef[T])(implicit H: GT[T]): Criterial[T] = F.gt(c, other)
+    def leq(other: CriterialRef[T])(implicit H: LEQ[T]): Criterial[T] = F.leq(c, other)
+
+    def geq(other: CriterialRef[T])(implicit H: GEQ[T]): Criterial[T] = F.geq(c, other)
+
+    def ===(other: CriterialRef[T])(implicit H: EQ[T]): Criterial[T] = F.===(c, other)
+
+    def =!=(other: CriterialRef[T])(implicit H: NEQ[T]): Criterial[T] = F.=!=(c, other)
+
+    def like(other: CriterialRef[T])(implicit H: LIKE[T]): Criterial[T] = F.like(c, other)
+
+    def in(other: CriterialRef[T])(implicit H: IN[T]): Criterial[T] = F.in(c, other)
+
+    def notin(other: CriterialRef[T])(implicit H: NOTIN[T]): Criterial[T] = F.notin(c, other)
+
+    def isNull(implicit H: ISNULL[T]): Criterial[T] = F.isNull(c)
+
+    def isNotNull(implicit H: ISNOTNULL[T]): Criterial[T] = F.isNotNull(c)
+
+    def between(other: CriterialRef[T])(implicit H: BETWEEN[T]): Criterial[T] = F.between(c, other)
+
+    def notBetween(other: CriterialRef[T])(implicit H: NOTBETWEEN[T]): Criterial[T] = F.notBetween(c, other)
 
   }
 
