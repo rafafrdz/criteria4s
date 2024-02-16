@@ -1,14 +1,22 @@
-import Dependencies._
+lazy val criterialDSL: Project =
+  project
+    .in(file("."))
+    .disablePlugins(AssemblyPlugin)
+    .enablePlugins(NoPublish)
+    .dependsOn(core, examples)
 
-ThisBuild / scalaVersion     := "2.13.12"
-ThisBuild / version          := "0.1.0-SNAPSHOT"
-ThisBuild / organization     := "com.example"
-ThisBuild / organizationName := "example"
+lazy val core: Project =
+  (project in file("core"))
+    .settings(
+      name := "core"
+    )
 
-lazy val root = (project in file("."))
-  .settings(
-    name := "criterial-dsl",
-    libraryDependencies += munit % Test
-  )
+lazy val examples: Project =
+  (project in file("examples"))
+    .settings(
+      name           := "examples",
+      publish / skip := true
+    )
+    .dependsOn(core)
 
 // See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.
