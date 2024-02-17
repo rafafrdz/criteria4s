@@ -1,14 +1,19 @@
-lazy val criterialDSL: Project =
+lazy val `criterial-dsl`: Project =
   project
     .in(file("."))
-    .disablePlugins(AssemblyPlugin)
-    .enablePlugins(NoPublish)
+//    .disablePlugins(AssemblyPlugin)
+//    .enablePlugins(NoPublish)
     .dependsOn(core, examples)
+    .settings(
+      name := "criterial-dsl"
+//      publish / skip := true
+    )
 
 lazy val core: Project =
   (project in file("core"))
     .settings(
-      name := "core"
+      name           := "core",
+      publish / skip := false
     )
 
 lazy val examples: Project =
