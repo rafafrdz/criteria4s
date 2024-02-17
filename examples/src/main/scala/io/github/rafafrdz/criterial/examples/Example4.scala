@@ -4,7 +4,7 @@ import io.github.rafafrdz.criterial.core.Criterial
 import io.github.rafafrdz.criterial.core.Criterial.CriterialTag
 import io.github.rafafrdz.criterial.core.CriterialCondOp.{AND, OR}
 import io.github.rafafrdz.criterial.core.CriterialPredOp.{EQ, LEQ}
-import io.github.rafafrdz.criterial.examples.datastores.{Postgres, WeirdDatastore}
+import io.github.rafafrdz.criterial.examples.datastores.{MySQL, Postgres, WeirdDatastore}
 import io.github.rafafrdz.criterial.extensions._
 import io.github.rafafrdz.criterial.functions._
 
@@ -24,6 +24,12 @@ object Example4 extends App {
              |expr[Postgres]: ${expr[Postgres]}
              |
              |inlineExpr[Postgres]: ${inlineExpr[Postgres]}
+             |
+             |Examples for MySQL instances
+             |
+             |expr[MySQL]: ${expr[MySQL]}
+             |
+             |inlineExpr[MySQL]: ${inlineExpr[MySQL]}
              |
              |Examples for WeirdDatastore instances
              |

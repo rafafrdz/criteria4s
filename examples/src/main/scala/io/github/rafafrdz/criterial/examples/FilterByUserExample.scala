@@ -3,7 +3,7 @@ package io.github.rafafrdz.criterial.examples
 import io.github.rafafrdz.criterial.core.Criterial
 import io.github.rafafrdz.criterial.core.Criterial.CriterialTag
 import io.github.rafafrdz.criterial.core.CriterialPredOp.EQ
-import io.github.rafafrdz.criterial.examples.datastores.{Postgres, WeirdDatastore}
+import io.github.rafafrdz.criterial.examples.datastores.{MySQL, Postgres, WeirdDatastore}
 import io.github.rafafrdz.criterial.extensions._
 import io.github.rafafrdz.criterial.functions._
 
@@ -18,6 +18,10 @@ object FilterByUserExample extends App {
     s"""Examples for Postgres instances
        |
        |expr[Postgres]: ${expr[Postgres]("USER_ID", UUID.randomUUID())}
+       |
+       |Examples for MySQL instances
+       |
+       |expr[MySQL]: ${expr[MySQL]("USER_ID", UUID.randomUUID())}
        |
        |Examples for WeirdDatastore instances
        |
