@@ -8,6 +8,8 @@ of the Criterial DSL is as follows:
 ```text
 Criterial   := ConjOp Criterial Criterial | PredOp Ref Ref | Value<Boolean>
 RefC        := Value<T> | Col
+ConjOp      := AND | OR
+PredOp      := EQ | NEQ | GT | LT | GEQ | LEQ | IN | LIKE | IS_NULL | IS_NOT_NULL ...
 ```
 
 Where:
