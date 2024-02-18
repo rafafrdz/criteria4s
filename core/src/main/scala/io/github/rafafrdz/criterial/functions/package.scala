@@ -5,17 +5,12 @@ import io.github.rafafrdz.criterial.core._
 
 package object functions extends predicates with conjunctions {
 
-  def eval[T <: CriterialTag, H <: CriterialCollection[T]](crx: Criterial[T]*)(implicit
-      H: H
-  ): Criterial[T] =
-    H.eval(crx: _*)
-
-  def pred[T <: CriterialTag, H <: CriterialPredOp[T]](cr1: CriterialRef[T], cr2: CriterialRef[T])(
+  def pred[T <: CriterialTag, H <: PredOp[T]](cr1: Ref[T], cr2: Ref[T])(
       implicit H: H
   ): Criterial[T] =
     H.eval(cr1, cr2)
 
-  def cond[T <: CriterialTag, H <: CriterialCondOp[T]](cr1: Criterial[T], cr2: Criterial[T])(
+  def cond[T <: CriterialTag, H <: ConjOp[T]](cr1: Criterial[T], cr2: Criterial[T])(
       implicit H: H
   ): Criterial[T] =
     H.eval(cr1, cr2)

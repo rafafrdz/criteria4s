@@ -1,8 +1,8 @@
 package io.github.rafafrdz.criterial.examples.datastores
 
 import io.github.rafafrdz.criterial.core.Criterial.CriterialTag
-import io.github.rafafrdz.criterial.core.CriterialCondOp._
-import io.github.rafafrdz.criterial.core.CriterialPredOp._
+import io.github.rafafrdz.criterial.core.ConjOp._
+import io.github.rafafrdz.criterial.core.PredOp._
 import io.github.rafafrdz.criterial.instances._
 
 trait WeirdDatastore extends CriterialTag

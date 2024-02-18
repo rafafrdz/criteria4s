@@ -1,6 +1,6 @@
 package io.github.rafafrdz.criterial.examples
 
-import io.github.rafafrdz.criterial.core.Criterial
+import io.github.rafafrdz.criterial.core._
 import io.github.rafafrdz.criterial.examples.datastores.Postgres
 import io.github.rafafrdz.criterial.functions._
 

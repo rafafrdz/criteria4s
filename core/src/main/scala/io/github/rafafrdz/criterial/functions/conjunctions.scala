@@ -2,7 +2,7 @@ package io.github.rafafrdz.criterial.functions
 
 import io.github.rafafrdz.criterial.core.Criterial
 import io.github.rafafrdz.criterial.core.Criterial.CriterialTag
-import io.github.rafafrdz.criterial.core.CriterialCondOp._
+import io.github.rafafrdz.criterial.core.ConjOp._
 
 private[functions] trait conjunctions {
 

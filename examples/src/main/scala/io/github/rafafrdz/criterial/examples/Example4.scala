@@ -1,9 +1,6 @@
 package io.github.rafafrdz.criterial.examples
 
-import io.github.rafafrdz.criterial.core.Criterial
-import io.github.rafafrdz.criterial.core.Criterial.CriterialTag
-import io.github.rafafrdz.criterial.core.CriterialCondOp.{AND, OR}
-import io.github.rafafrdz.criterial.core.CriterialPredOp.{EQ, LEQ}
+import io.github.rafafrdz.criterial.core._
 import io.github.rafafrdz.criterial.examples.datastores.{MySQL, Postgres, WeirdDatastore}
 import io.github.rafafrdz.criterial.extensions._
 import io.github.rafafrdz.criterial.functions._
