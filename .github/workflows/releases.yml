@@ -3,7 +3,8 @@ on:
   release:
     types: [ created ]
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  SONATYPE_USER: ${{ secrets.SONATYPE_USER }}
+  SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -20,4 +21,4 @@ jobs:
         run: sbt clean
 
       - name: Publish
-        run: sbt publishSigned
+        run: sbt publish
