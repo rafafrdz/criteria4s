@@ -16,5 +16,8 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
           cache: 'sbt'
+      - name: Clean
+        run: sbt clean
+
       - name: Publish
-        run: sbt publish
+        run: sbt publishSigned
