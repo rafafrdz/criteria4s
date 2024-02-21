@@ -5,6 +5,7 @@ ThisBuild / organization         := "io.github.rafafrdz"
 ThisBuild / organizationName     := "rafafrdz"
 ThisBuild / sonatypeProfileName  := "io.github.rafafrdz"
 ThisBuild / organizationHomepage := Some(url("https://github.com/rafafrdz"))
+ThisBuild / homepage             := Some(url("https://github.com/rafafrdz/criteria-dsl"))
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
@@ -28,17 +29,11 @@ ThisBuild / publishMavenStyle    := true
 ThisBuild / versionScheme        := Some("early-semver")
 ThisBuild / pomIncludeRepository := { _ => false }
 
+/** Reference the project OSS repository */
 // Repository for releases on Maven Central using Sonatype
 ThisBuild / publishTo              := sonatypePublishToBundle.value
 ThisBuild / sonatypeCredentialHost := "s01.oss.sonatype.org"
-
-ThisBuild / sonatypeRepository := {
-  val nexus: String = "https://s01.oss.sonatype.org/"
-  nexusRepositoryFromTag(nexus)
-}
-
-// Reference the project OSS repository
-
+ThisBuild / sonatypeRepository     := nexusRepositoryFromTag("https://s01.oss.sonatype.org/")
 ThisBuild / sonatypeProjectHosting := Some(
   GitHubHosting(
     user = "rafafrdz",
@@ -47,26 +42,12 @@ ThisBuild / sonatypeProjectHosting := Some(
   )
 )
 
-ThisBuild / homepage := Some(url("https://github.com/rafafrdz/criteria-dsl"))
 ThisBuild / credentials += Credentials(
   "Sonatype Nexus Repository Manager",
   "s01.oss.sonatype.org",
   sys.env.getOrElse("SONATYPE_USER", ""),
   sys.env.getOrElse("SONATYPE_PASSWORD", "")
 )
-
-def nexusFromTag(nexus: String): Option[MavenRepository] =
-  refFromTag
-    .flatMap { t =>
-      t.headOption.map {
-        case 'v' =>
-          Some(
-            "releases" at nexus + "service/local/staging/deploy/maven2/"
-          ) // Production build, should be v1.2.3
-        case _ => Some("snapshots" at nexus + "content/repositories/snapshots/")
-      }
-    }
-    .getOrElse(Some("snapshots" at nexus + "content/repositories/snapshots/"))
 
 def nexusRepositoryFromTag(nexus: String): String =
   refFromTag
