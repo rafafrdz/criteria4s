@@ -96,17 +96,7 @@ object Build extends AutoPlugin {
       ThisBuild / Test / testOptions += Tests.Argument("-oDF"),
       // -v Log "test run started" / "test started" / "test run finished" events on log level "info" instead of "debug"
       // -a Show stack traces and exception class name for AssertionErrors
-      ThisBuild / Test / testOptions += Tests.Argument(TestFrameworks.JUnit, "-v", "-a"),
-      ThisBuild / credentials +=
-        Credentials(
-          "GitHub Package Registry",
-          "maven.pkg.github.com",
-          "rafafrdz",
-          sys.env
-            .get("GITHUB_RAFAFRDZ_TOKEN")
-            .orElse(sys.env.get("GITHUB_TOKEN"))
-            .getOrElse("")
-        )
+      ThisBuild / Test / testOptions += Tests.Argument(TestFrameworks.JUnit, "-v", "-a")
     )
 
   lazy val assemblySettings = Seq(

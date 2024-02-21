@@ -18,16 +18,14 @@ lazy val sql: Project =
   (project in file("sql"))
     .settings(
       name           := "sql",
-      publish / skip := true
+      publish / skip := false
     )
     .dependsOn(core)
-
 
 lazy val examples: Project =
   (project in file("examples"))
     .settings(
-      name           := "examples",
-      publish / skip := true
+      name := "examples"
     )
     .dependsOn(core, sql)
 
