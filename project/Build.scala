@@ -22,7 +22,7 @@ object Build extends AutoPlugin {
   override def projectSettings: Seq[Setting[_]] =
     Vector(
       ThisBuild / organization       := "io.github.rafafrdz",
-      ThisBuild / name               := "criterial-dsl",
+      ThisBuild / name               := "criteria-dsl",
       ThisBuild / scalaVersion       := Version.Scala,
       ThisBuild / crossScalaVersions := Vector(scalaVersion.value),
       ThisBuild / javacOptions       := Seq("-g:none"),
