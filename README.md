@@ -1,12 +1,14 @@
-
 ![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/io.github.rafafrdz/criteria4s-core_2.13?server=https%3A%2F%2Fs01.oss.sonatype.org&style=flat-square&label=Sonatype&labelColor=%20&color=%2acf45%20%20) [![License](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square&label=License)](https://raw.githubusercontent.com/47degrees/github4s/master/LICENSE)
 
 # Criteria4s
 
+Criteria4s is a simple domain-specific language (dsl) to define criteria expressions for any datastores by using of
+Scala type class mechanisms in a type-safe way. It presents to be agnostic to any datastore and it is extensible to
+support any kind of datastores.
+
 ## Formal Definition of the Expressions
 
-Criteria4s is a simple domain-specific language (dsl) to define criteria expressions for different datastores by using of Scala type class mechanisms. The formal definition
-of the Criteria4s' type-classes (expressions) is as follows:
+The formal definition of the Criteria4s' type-classes (expressions) is as follows:
 
 ```text
 Criteria    :=  ConjOp Criteria Criteria | PredOp Ref Ref | Value<Boolean>
@@ -34,8 +36,7 @@ libraryDependencies += "io.github.rafafrdz" %% "criteria4s-sql"   % "<version>" 
 ```
 
 > [!IMPORTANT]  
-> Criteria4s is a work in progress and it is not ready for production use. Also, it is just available for Scala 2.13.
-
+> Criteria4s is a work in progress and it is not ready for production use. Also, it is just available for Scala **2.13**.
 
 ## Examples
 
