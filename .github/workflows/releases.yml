@@ -2,23 +2,30 @@ name: Publish Artifact on Release
 on:
   release:
     types: [ created ]
-env:
-  SONATYPE_USER: ${{ secrets.SONATYPE_USER }}
-  SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-      - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/checkout@v4
         with:
-          distribution: 'temurin'
-          java-version: '17'
-          cache: 'sbt'
+          fetch-depth: 0
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 8
+          cache: sbt
+
       - name: Clean
         run: sbt clean
 
       - name: Publish
-        run: sbt publish
+        run: sbt publishSigned
+        env:
+          PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
+          PGP_SECRET: ${{ secrets.PGP_SECRET }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
