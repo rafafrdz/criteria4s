@@ -4,12 +4,12 @@ ThisBuild / organization         := "io.github.rafafrdz"
 ThisBuild / organizationName     := "rafafrdz"
 ThisBuild / sonatypeProfileName  := "io.github.rafafrdz"
 ThisBuild / organizationHomepage := Some(url("https://github.com/rafafrdz"))
-ThisBuild / homepage             := Some(url("https://github.com/rafafrdz/criteria-dsl"))
+ThisBuild / homepage             := Some(url("https://github.com/rafafrdz/criteria4s"))
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
-    url("https://github.com/rafafrdz/criteria-dsl"),
-    "scm:git@github.com:rafafrdz/criteria-dsl.git"
+    url("https://github.com/rafafrdz/criteria4s"),
+    "scm:git@github.com:rafafrdz/criteria4s.git"
   )
 )
 
@@ -34,7 +34,7 @@ ThisBuild / sonatypeRepository     := "https://s01.oss.sonatype.org/service/loca
 ThisBuild / sonatypeProjectHosting := Some(
   GitHubHosting(
     user = "rafafrdz",
-    repository = "criteria-dsl",
+    repository = "criteria4s",
     email = "rafaelfernandezortiz@gmail.com"
   )
 )
