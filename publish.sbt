@@ -45,7 +45,7 @@ ThisBuild / sonatypeProjectHosting := Some(
 ThisBuild / credentials += Credentials(
   "Sonatype Nexus Repository Manager",
   "s01.oss.sonatype.org",
-  sys.env.getOrElse("SONATYPE_USER", ""),
+  sys.env.getOrElse("SONATYPE_USERNAME", ""),
   sys.env.getOrElse("SONATYPE_PASSWORD", "")
 )
 
