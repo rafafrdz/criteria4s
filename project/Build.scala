@@ -90,8 +90,9 @@ object Build extends AutoPlugin {
       ThisBuild / updateOptions := updateOptions.value
         .withCachedResolution(cachedResolution = false),
       // do not build and publish scaladocs
-      ThisBuild / Compile / doc / sources                := Seq.empty,
-      ThisBuild / Compile / packageDoc / publishArtifact := false,
+      ThisBuild / Compile / doc / sources := Seq.empty,
+      // Remove this one because: https://github.com/sbt/sbt-ci-release/issues/168
+      // ThisBuild / Compile / packageDoc / publishArtifact := false,
       // show full stack traces and test case durations
       ThisBuild / Test / testOptions += Tests.Argument("-oDF"),
       // -v Log "test run started" / "test started" / "test run finished" events on log level "info" instead of "debug"
