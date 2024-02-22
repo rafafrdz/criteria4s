@@ -21,6 +21,15 @@ Where:
 - `Value<T>` is a value expression of a certain type `T`
 - `Col` is a column expression
 
+## Getting Started
+
+To use the Criterial DSL, you need to add the following dependency to your project:
+
+```scala
+libraryDependencies += "io.github.rafafrdz" % "criterial-core_2.13" % "<version>" // Core library
+libraryDependencies += "io.github.rafafrdz" % "criterial-sql_2.13" % "<version>" // SQL implementation
+```
+
 ## Examples
 
 Here, we will show some examples of how to use the Criterial DSL.
@@ -62,6 +71,9 @@ Or maybe we can use the Criteria DSL inline:
 // res: {left: {left: {left: a, opt: <=, right: 3 }, opt: AND, right: {left: b, opt: <=, right: 4 } }, opt: OR, right: {left: c, opt: =, right: c } }
 ```
 
+You can find more examples in
+the [`criterial-examples`](./examples/src/main/scala/io/github/rafafrdz/criterial/examples) module.
+
 ## Todo Features
 
 - [x] Add a formal definition of the Criterial DSL
@@ -69,4 +81,4 @@ Or maybe we can use the Criteria DSL inline:
 - [ ] Add traits for semantic of RefC (both `ValueC<T>` and `ColC`)
 - [ ] Complete SQL predicate expressions
 - [ ] Define conjunction and predicates operation methods by using symbols
-- [ ] Upload the artifact to Maven Central Repository
+- [x] Upload the artifact to Maven Central Repository
