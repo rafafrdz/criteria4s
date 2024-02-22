@@ -49,6 +49,13 @@ ThisBuild / credentials += Credentials(
   sys.env.getOrElse("SONATYPE_PASSWORD", "")
 )
 
+ThisBuild / credentials += Credentials(
+  "GnuPG Key ID",
+  "gpg",
+  sys.env.getOrElse("PGP_KEY_IDENTIFIER", ""),
+  sys.env.getOrElse("PGP_SECRET", "")
+)
+
 def nexusRepositoryFromTag(nexus: String): String =
   refFromTag
     .flatMap { t =>
