@@ -4,12 +4,12 @@ ThisBuild / organization         := "io.github.rafafrdz"
 ThisBuild / organizationName     := "rafafrdz"
 ThisBuild / sonatypeProfileName  := "io.github.rafafrdz"
 ThisBuild / organizationHomepage := Some(url("https://github.com/rafafrdz"))
-ThisBuild / homepage             := Some(url("https://github.com/rafafrdz/criteria-dsl"))
+ThisBuild / homepage             := Some(url("https://github.com/rafafrdz"))
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
-    url("https://github.com/rafafrdz/criteria-dsl"),
-    "scm:git@github.com:rafafrdz/criteria-dsl.git"
+    url("https://github.com/rafafrdz/criterial-dsl"),
+    "scm:git@github.com:rafafrdz/criterial-dsl.git"
   )
 )
 
