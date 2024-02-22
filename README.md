@@ -1,3 +1,6 @@
+
+![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/io.github.rafafrdz/criterial-core_2.13?server=https%3A%2F%2Fs01.oss.sonatype.org&style=flat-square&label=Sonatype&labelColor=%20&color=%2acf45%20%20) [![License](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square&label=License)](https://raw.githubusercontent.com/47degrees/github4s/master/LICENSE)
+
 # Criterial DSL
 
 ## Formal Definition of Criterial Expressions
@@ -20,6 +23,19 @@ Where:
 - `Ref` is a reference to a value or a column
 - `Value<T>` is a value expression of a certain type `T`
 - `Col` is a column expression
+
+## Getting Started
+
+To use the Criterial DSL, you need to add the following dependency to your project:
+
+```scala
+libraryDependencies += "io.github.rafafrdz" %% "criterial-core" % "<version>" // Core library
+libraryDependencies += "io.github.rafafrdz" %% "criterial-sql" % "<version>" // SQL implementation
+```
+
+> [!IMPORTANT]  
+> Criterial DSL is a work in progress and it is not ready for production use. Also, it is just available for Scala 2.13.
+
 
 ## Examples
 
@@ -62,6 +78,9 @@ Or maybe we can use the Criteria DSL inline:
 // res: {left: {left: {left: a, opt: <=, right: 3 }, opt: AND, right: {left: b, opt: <=, right: 4 } }, opt: OR, right: {left: c, opt: =, right: c } }
 ```
 
+You can find more examples in
+the [`criterial-examples`](./examples/src/main/scala/io/github/rafafrdz/criterial/examples) module.
+
 ## Todo Features
 
 - [x] Add a formal definition of the Criterial DSL
@@ -69,4 +88,4 @@ Or maybe we can use the Criteria DSL inline:
 - [ ] Add traits for semantic of RefC (both `ValueC<T>` and `ColC`)
 - [ ] Complete SQL predicate expressions
 - [ ] Define conjunction and predicates operation methods by using symbols
-- [ ] Upload the artifact to Maven Central Repository
+- [x] Upload the artifact to Maven Central Repository
