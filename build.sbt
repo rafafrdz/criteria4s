@@ -1,23 +1,23 @@
-lazy val `criterial-dsl`: Project =
+lazy val criteria4s: Project =
   project
     .in(file("."))
     .disablePlugins(AssemblyPlugin)
     .aggregate(core, sql, examples)
     .settings(
-      name := "criterial-dsl"
+      name := "criteria4s"
     )
 
 lazy val core: Project =
   (project in file("core"))
     .settings(
-      name           := "criterial-core",
+      name           := "criteria4s-core",
       publish / skip := false
     )
 
 lazy val sql: Project =
   (project in file("sql"))
     .settings(
-      name           := "criterial-sql",
+      name           := "criteria4s-sql",
       publish / skip := false
     )
     .dependsOn(core)
@@ -25,6 +25,6 @@ lazy val sql: Project =
 lazy val examples: Project =
   (project in file("examples"))
     .settings(
-      name := "criterial-examples"
+      name := "criteria4s-examples"
     )
     .dependsOn(core, sql)
