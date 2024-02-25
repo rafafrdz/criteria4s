@@ -12,7 +12,7 @@ The formal definition of the Criteria4s' type-classes (expressions) is as follow
 
 ```text
 Criteria    :=  ConjOp Criteria Criteria | PredOp Ref Ref | Value<Boolean>
-RefC        :=  Value<T> | Col
+Ref         :=  Value<T> | Col
 ConjOp      :=  AND | OR
 PredOp      :=  EQ | NEQ | GT | LT | GEQ | LEQ | IN | LIKE | IS_NULL | IS_NOT_NULL ...
 ```
@@ -31,12 +31,13 @@ Where:
 To use dsl of Criteria4s, you need to add the following dependency to your project:
 
 ```scala
-libraryDependencies += "io.github.rafafrdz" %% "criteria4s-core"  % "<version>" // Core library
-libraryDependencies += "io.github.rafafrdz" %% "criteria4s-sql"   % "<version>" // SQL implementation
+libraryDependencies += "io.github.rafafrdz" %% "criteria4s-core" % "<version>" // Core library
+libraryDependencies += "io.github.rafafrdz" %% "criteria4s-sql" % "<version>" // SQL implementation
 ```
 
 > [!IMPORTANT]  
-> Criteria4s is a work in progress and it is not ready for production use. Also, it is just available for Scala **2.13**.
+> Criteria4s is a work in progress and it is not ready for production use. Also, it is just available for Scala **2.13
+**.
 
 ## Examples
 
@@ -48,13 +49,13 @@ import io.github.rafafrdz.criteria4s.examples.datastores._
 import io.github.rafafrdz.criteria4s.extensions._
 import io.github.rafafrdz.criteria4s.functions._
 
-def ageCriteria[T <: CriteriaTag : GT : LT : AND]: Criteria[T] =
+def ageCriteria[T <: CriteriaTag : GT : LT : AND : Sym]: Criteria[T] =
   (col[T]("age") gt lit(18)) and (col[T]("age") lt lit(65))
 
-def expr[T <: CriteriaTag : LEQ : EQ : AND : OR]: Criteria[T] =
+def expr[T <: CriteriaTag : LEQ : EQ : AND : OR : Sym]: Criteria[T] =
   (col[T]("a") leq lit(3)) and (col[T]("b") leq lit(4)) or (col[T]("c") === lit("c"))
 
-def expr2[T <: CriteriaTag : EQ](fieldName: String, id: UUID): Criteria[T] =
+def expr2[T <: CriteriaTag : EQ : Sym](fieldName: String, id: UUID): Criteria[T] =
   col[T](fieldName) === lit(id.toString)
 ```
 
@@ -66,10 +67,10 @@ ageCriteria[WeirdDatastore]
 // res: {left: {left: age, opt: >, right: 18 }, opt: AND, right: {left: age, opt: <, right: 65 } }
 
 expr[MySQL]
-// res: (((a <<< 3) AND (b <<< 4)) OR (c = c))
+// res: (((a <<< '3') AND (b <<< '4')) OR (c = 'c'))
 
 expr2[Postgres]("USER_ID", UUID.randomUUID())
-// res: (USER_ID = 7c4f9bd3-45ed-4eca-9b21-eafe73d75cc8)
+// res: (`USER_ID` = '07715cee-5d87-427d-99a7-cc03f2b5ef4a')
 ```
 
 Or maybe we can use the Criteria DSL inline:
@@ -86,7 +87,6 @@ the [`criteria4s-examples`](./examples/src/main/scala/io/github/rafafrdz/criteri
 
 - [x] Add a formal definition of the expressions / type-classes of the DSL
 - [ ] Add formal definition for Collection Values
-- [ ] Add traits for semantic of RefC (both `ValueC<T>` and `ColC`)
 - [ ] Complete SQL predicate expressions
 - [ ] Define conjunction and predicates operation methods by using symbols
 - [x] Upload the artifact to Maven Central Repository
