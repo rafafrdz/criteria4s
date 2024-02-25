@@ -12,7 +12,7 @@ object Postgres extends SQLExpr[Postgres] {
    * default implementation
    */
 
-  val C: String => String                     = s => s""""!$s!""""
-  val V: String => String                     = s => s"""`$s`"""
+  val C: String => String                     = s => s"`$s`"
+  val V: String => String                     = s => s"'$s'"
   override implicit val symRef: Sym[Postgres] = sym[Postgres](C, V)
 }
