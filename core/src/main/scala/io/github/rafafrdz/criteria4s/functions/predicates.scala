@@ -3,17 +3,19 @@ package io.github.rafafrdz.criteria4s.functions
 import io.github.rafafrdz.criteria4s.core.Criteria.CriteriaTag
 import io.github.rafafrdz.criteria4s.core.PredOp._
 import io.github.rafafrdz.criteria4s.core.Ref.{Bool, Col, Value}
-import io.github.rafafrdz.criteria4s.core.{Criteria, Ref}
+import io.github.rafafrdz.criteria4s.core.{Criteria, Ref, Sym}
 
 private[functions] trait predicates {
 
-  def lit[T <: CriteriaTag, V](v: V): Value[V, T] = Ref.value(v)
+  def lit[T <: CriteriaTag: Sym, V](v: V): Value[V, T] =
+    implicitly[Sym[T]].value[V](Ref.value(v))
 
-  def bool[T <: CriteriaTag](v: Boolean): Bool[T] = Ref.bool(v)
+  def bool[T <: CriteriaTag: Sym](v: Boolean): Bool[T] =
+    implicitly[Sym[T]].bool(Ref.bool(v))
 
   private[criteria4s] def __[T <: CriteriaTag]: Value[Nothing, T] = Ref.nothing[T]
 
-  def col[T <: CriteriaTag](ref: String): Col[T] = Ref.col(ref)
+  def col[T <: CriteriaTag: Sym](ref: String): Col[T] = implicitly[Sym[T]].col(Ref.col(ref))
 
 //  private def array_[T <: CriteriaTag: ARRAY](values: Criteria[T]*): Criteria[T] = pred[T, ARRAY[T]](values: _*)
 //
@@ -56,14 +58,14 @@ private[functions] trait predicates {
     pred[T, ISNOTNULL[T]](cr1, __)
 
   def between[T <: CriteriaTag: BETWEEN](
-                                           cr1: Ref[T],
-                                           cr2: Ref[T]
+      cr1: Ref[T],
+      cr2: Ref[T]
   ): Criteria[T] =
     pred[T, BETWEEN[T]](cr1, cr2)
 
   def notBetween[T <: CriteriaTag: NOTBETWEEN](
-                                                 cr1: Ref[T],
-                                                 cr2: Ref[T]
+      cr1: Ref[T],
+      cr2: Ref[T]
   ): Criteria[T] =
     pred[T, NOTBETWEEN[T]](cr1, cr2)
 }

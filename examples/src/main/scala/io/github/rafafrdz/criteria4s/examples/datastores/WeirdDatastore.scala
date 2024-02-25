@@ -1,8 +1,9 @@
 package io.github.rafafrdz.criteria4s.examples.datastores
 
-import io.github.rafafrdz.criteria4s.core.Criteria.CriteriaTag
 import io.github.rafafrdz.criteria4s.core.ConjOp._
+import io.github.rafafrdz.criteria4s.core.Criteria.CriteriaTag
 import io.github.rafafrdz.criteria4s.core.PredOp._
+import io.github.rafafrdz.criteria4s.core.Sym
 import io.github.rafafrdz.criteria4s.instances._
 
 trait WeirdDatastore extends CriteriaTag
@@ -47,5 +48,7 @@ object WeirdDatastore {
 
   implicit val notbetweenPred: NOTBETWEEN[WeirdDatastore] =
     build[WeirdDatastore, NOTBETWEEN](wope("NOT BETWEEN"))
+
+  implicit val symRef: Sym[WeirdDatastore] = sym0[WeirdDatastore]
 
 }

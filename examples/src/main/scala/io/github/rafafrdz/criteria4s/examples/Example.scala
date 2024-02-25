@@ -1,7 +1,6 @@
 package io.github.rafafrdz.criteria4s.examples
 
 import io.github.rafafrdz.criteria4s.core._
-import io.github.rafafrdz.criteria4s.functions._
 import io.github.rafafrdz.criteria4s.examples.datastores.Postgres
 import io.github.rafafrdz.criteria4s.functions._
 

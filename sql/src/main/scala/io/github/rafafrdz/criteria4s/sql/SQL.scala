@@ -1,19 +1,21 @@
 package io.github.rafafrdz.criteria4s.sql
 
-import io.github.rafafrdz.criteria4s.core.Criteria.CriteriaTag
 import io.github.rafafrdz.criteria4s.core.ConjOp._
 import io.github.rafafrdz.criteria4s.core.PredOp._
-import io.github.rafafrdz.criteria4s.instances.{build, build1}
+import io.github.rafafrdz.criteria4s.core.{CriteriaTag, Sym}
+import io.github.rafafrdz.criteria4s.instances._
 
 trait SQL extends CriteriaTag
 
 object SQL {
 
+  private def opeExpr(symbol: String)(a: String, b: String): String = s"($a $symbol $b)"
+
+  private def opeExpr1(symbol: String)(a: String): String = s"($a $symbol)"
+
   trait SQLExpr[T <: SQL] {
 
-    private def opeExpr(symbol: String)(a: String, b: String): String = s"($a $symbol $b)"
-
-    private def opeExpr1(symbol: String)(a: String): String = s"($a $symbol)"
+    implicit val symRef: Sym[T] = sym[T](v => v, c => s"'$c'")
 
     implicit val ltPred: LT[T] = build[T, LT](opeExpr("<"))
 

@@ -1,15 +1,15 @@
 package io.github.rafafrdz.criteria4s.examples
 
 import io.github.rafafrdz.criteria4s.core._
+import io.github.rafafrdz.criteria4s.examples.datastores.{MySQL, Postgres, WeirdDatastore}
 import io.github.rafafrdz.criteria4s.extensions._
 import io.github.rafafrdz.criteria4s.functions._
-import io.github.rafafrdz.criteria4s.examples.datastores.{MySQL, Postgres, WeirdDatastore}
 
 import java.util.UUID
 
 object FilterByUserExample extends App {
 
-  def expr[T <: CriteriaTag: EQ](fieldName: String, id: UUID): Criteria[T] =
+  def expr[T <: CriteriaTag: EQ: Sym](fieldName: String, id: UUID): Criteria[T] =
     col[T](fieldName) === lit(id.toString)
 
   println {
