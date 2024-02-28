@@ -30,14 +30,38 @@ Where:
 
 To use dsl of Criteria4s, you need to add the following dependency to your project:
 
+**SonaType Repository**
+
+- Core library: [criteria4s-core](https://central.sonatype.com/artifact/io.github.rafafrdz/criteria4s-core_2.13)
+- SQL implementation: [criteria4s-sql](https://central.sonatype.com/artifact/io.github.rafafrdz/criteria4s-sql_2.13)
+
+**SBT**
+
 ```scala
-libraryDependencies += "io.github.rafafrdz" %% "criteria4s-core" % "<version>" // Core library
-libraryDependencies += "io.github.rafafrdz" %% "criteria4s-sql" % "<version>" // SQL implementation
+libraryDependencies += "io.github.rafafrdz" %% "criteria4s-core"  % "<version>" // Core library
+libraryDependencies += "io.github.rafafrdz" %% "criteria4s-sql"   % "<version>" // SQL implementation
+```
+
+**Maven**
+
+```xml
+<!-- Core library -->
+<dependency>
+    <groupId>io.github.rafafrdz</groupId>
+    <artifactId>criteria4s-core_2.13</artifactId>
+    <version>0.7.0</version>
+</dependency>
+        
+<!-- SQL implementation -->
+<dependency>
+    <groupId>io.github.rafafrdz</groupId>
+    <artifactId>criteria4s-core_2.13</artifactId>
+    <version>0.7.0</version>
+</dependency>
 ```
 
 > [!IMPORTANT]  
-> Criteria4s is a work in progress and it is not ready for production use. Also, it is just available for Scala **2.13
-**.
+> Criteria4s is a work in progress and it is not ready for production use. Also, it is just available for Scala 2.13.
 
 ## Examples
 
