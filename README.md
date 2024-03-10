@@ -2,9 +2,9 @@
 
 # Criteria4s
 
-Criteria4s is a simple domain-specific language (dsl) to define criteria expressions for any datastores by using of
-Scala type class mechanisms in a type-safe way. It presents to be agnostic to any datastore and it is extensible to
-support any kind of datastores.
+Criteria4s is a simple domain-specific language (DSL) to define criteria and predicate expressions for any data stores
+by using Scala type class mechanisms in a type-safe way. It pretends to be agnostic to any data store, and it is
+extensible to support any kind of data stores.
 
 ## Formal Definition of the Expressions
 
@@ -38,8 +38,8 @@ To use dsl of Criteria4s, you need to add the following dependency to your proje
 **SBT**
 
 ```scala
-libraryDependencies += "io.github.rafafrdz" %% "criteria4s-core"  % "<version>" // Core library
-libraryDependencies += "io.github.rafafrdz" %% "criteria4s-sql"   % "<version>" // SQL implementation
+libraryDependencies += "io.github.rafafrdz" %% "criteria4s-core" % "<version>" // Core library
+libraryDependencies += "io.github.rafafrdz" %% "criteria4s-sql" % "<version>" // SQL implementation
 ```
 
 **Maven**
@@ -51,12 +51,12 @@ libraryDependencies += "io.github.rafafrdz" %% "criteria4s-sql"   % "<version>" 
     <artifactId>criteria4s-core_2.13</artifactId>
     <version>0.7.0</version>
 </dependency>
-        
-<!-- SQL implementation -->
+
+        <!-- SQL implementation -->
 <dependency>
-    <groupId>io.github.rafafrdz</groupId>
-    <artifactId>criteria4s-core_2.13</artifactId>
-    <version>0.7.0</version>
+<groupId>io.github.rafafrdz</groupId>
+<artifactId>criteria4s-core_2.13</artifactId>
+<version>0.7.0</version>
 </dependency>
 ```
 
@@ -91,10 +91,10 @@ ageCriteria[WeirdDatastore]
 // res: {left: {left: age, opt: >, right: 18 }, opt: AND, right: {left: age, opt: <, right: 65 } }
 
 expr[MySQL]
-// res: (((a <<< '3') AND (b <<< '4')) OR (c = 'c'))
+// res: ((a <<< '3') AND (b <<< '4')) OR (c = 'c')
 
 expr2[Postgres]("USER_ID", UUID.randomUUID())
-// res: (`USER_ID` = '07715cee-5d87-427d-99a7-cc03f2b5ef4a')
+// res: `USER_ID` = '07715cee-5d87-427d-99a7-cc03f2b5ef4a'
 ```
 
 Or maybe we can use the Criteria DSL inline:
@@ -106,11 +106,3 @@ Or maybe we can use the Criteria DSL inline:
 
 You can find more examples in
 the [`criteria4s-examples`](./examples/src/main/scala/io/github/rafafrdz/criteria/examples) module.
-
-## Todo Features
-
-- [x] Add a formal definition of the expressions / type-classes of the DSL
-- [ ] Add formal definition for Collection Values
-- [ ] Complete SQL predicate expressions
-- [ ] Define conjunction and predicates operation methods by using symbols
-- [x] Upload the artifact to Maven Central Repository
