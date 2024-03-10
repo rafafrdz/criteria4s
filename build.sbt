@@ -1,3 +1,5 @@
+import Dependencies._
+
 lazy val criteria4s: Project =
   project
     .in(file("."))
@@ -21,6 +23,15 @@ lazy val sql: Project =
       publish / skip := false
     )
     .dependsOn(core)
+
+lazy val `spark-sql`: Project =
+  (project in file("spark-sql"))
+    .settings(
+      name           := "criteria4s-spark",
+      publish / skip := false,
+      libraryDependencies += spark.sql % "provided"
+    )
+    .dependsOn(core, sql)
 
 lazy val examples: Project =
   (project in file("examples"))
