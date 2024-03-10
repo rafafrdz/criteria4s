@@ -52,11 +52,11 @@ libraryDependencies += "io.github.rafafrdz" %% "criteria4s-sql" % "<version>" //
     <version>0.7.0</version>
 </dependency>
 
-        <!-- SQL implementation -->
+<!-- SQL implementation -->
 <dependency>
-<groupId>io.github.rafafrdz</groupId>
-<artifactId>criteria4s-core_2.13</artifactId>
-<version>0.7.0</version>
+    <groupId>io.github.rafafrdz</groupId>
+    <artifactId>criteria4s-core_2.13</artifactId>
+    <version>0.7.0</version>
 </dependency>
 ```
 
