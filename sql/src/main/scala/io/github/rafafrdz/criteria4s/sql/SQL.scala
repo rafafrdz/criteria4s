@@ -9,45 +9,50 @@ trait SQL extends CriteriaTag
 
 object SQL {
 
-  private def opeExpr(symbol: String)(a: String, b: String): String = s"($a $symbol $b)"
-
-  private def opeExpr1(symbol: String)(a: String): String = s"($a $symbol)"
+  private def predExpr(symbol: String)(a: String, b: String): String = s"$a $symbol $b"
+  private def opExpr(symbol: String)(a: String, b: String): String   = s"($a) $symbol ($b)"
+  private def predExpr1(symbol: String)(a: String): String           = s"$a $symbol"
 
   trait SQLExpr[T <: SQL] {
 
+    protected def predExpr(symbol: String)(a: String, b: String): String =
+      SQL.predExpr(symbol)(a, b)
+    protected def opExpr(symbol: String)(a: String, b: String): String = SQL.opExpr(symbol)(a, b)
+    protected def predExpr1(symbol: String)(a: String): String         = SQL.predExpr1(symbol)(a)
+
     implicit val symRef: Sym[T] = sym[T](v => v, c => s"'$c'")
 
-    implicit val ltPred: LT[T] = build[T, LT](opeExpr("<"))
+    implicit val ltPred: LT[T] = build[T, LT](predExpr("<"))
 
-    implicit val gtPred: GT[T] = build[T, GT](opeExpr(">"))
+    implicit val gtPred: GT[T] = build[T, GT](predExpr(">"))
 
-    implicit val orOp: OR[T] = build[T, OR](opeExpr("OR"))
+    implicit val orOp: OR[T] = build[T, OR](opExpr("OR"))
 
-    implicit val andOp: AND[T] = build[T, AND](opeExpr("AND"))
+    implicit val andOp: AND[T] = build[T, AND](opExpr("AND"))
 
-    implicit val eqPred: EQ[T] = build[T, EQ](opeExpr("="))
+    implicit val eqPred: EQ[T] = build[T, EQ](predExpr("="))
 
-    implicit val neqPred: NEQ[T] = build[T, NEQ](opeExpr("!="))
+    implicit val neqPred: NEQ[T] = build[T, NEQ](predExpr("!="))
 
-    implicit val leqPred: LEQ[T] = build[T, LEQ](opeExpr("<="))
+    implicit val leqPred: LEQ[T] = build[T, LEQ](predExpr("<="))
 
-    implicit val geqPred: GEQ[T] = build[T, GEQ](opeExpr(">="))
+    implicit val geqPred: GEQ[T] = build[T, GEQ](predExpr(">="))
 
-    implicit val likePred: LIKE[T] = build[T, LIKE](opeExpr("LIKE"))
+    implicit val likePred: LIKE[T] = build[T, LIKE](predExpr("LIKE"))
 
-    implicit val inPred: IN[T] = build[T, IN](opeExpr("IN"))
+    implicit val inPred: IN[T] = build[T, IN](predExpr("IN"))
 
-    implicit val notinPred: NOTIN[T] = build[T, NOTIN](opeExpr("NOT IN"))
+    implicit val notinPred: NOTIN[T] = build[T, NOTIN](predExpr("NOT IN"))
 
-    implicit val isnullPred: ISNULL[T] = build1[T, ISNULL](opeExpr1("IS NULL"))
+    implicit val isnullPred: ISNULL[T] = build1[T, ISNULL](predExpr1("IS NULL"))
 
     implicit val isnotnullPred: ISNOTNULL[T] =
-      build1[T, ISNOTNULL](opeExpr1("IS NOT NULL"))
+      build1[T, ISNOTNULL](predExpr1("IS NOT NULL"))
 
-    implicit val betweenPred: BETWEEN[T] = build[T, BETWEEN](opeExpr("BETWEEN"))
+    implicit val betweenPred: BETWEEN[T] = build[T, BETWEEN](predExpr("BETWEEN"))
 
     implicit val notbetweenPred: NOTBETWEEN[T] =
-      build[T, NOTBETWEEN](opeExpr("NOT BETWEEN"))
+      build[T, NOTBETWEEN](predExpr("NOT BETWEEN"))
   }
 
 }
