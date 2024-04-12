@@ -8,30 +8,30 @@ package object core {
 
   type OR[T <: CriteriaTag] = ConjOp.OR[T]
 
-  type GT[T <: CriteriaTag] = PredOp.GT[T]
+  type GT[T <: CriteriaTag] = PredicateBinary.GT[T]
 
-  type LT[T <: CriteriaTag] = PredOp.LT[T]
+  type LT[T <: CriteriaTag] = PredicateBinary.LT[T]
 
-  type EQ[T <: CriteriaTag] = PredOp.EQ[T]
+  type EQ[T <: CriteriaTag] = PredicateBinary.EQ[T]
 
-  type NEQ[T <: CriteriaTag] = PredOp.NEQ[T]
+  type NEQ[T <: CriteriaTag] = PredicateBinary.NEQ[T]
 
-  type GEQ[T <: CriteriaTag] = PredOp.GEQ[T]
+  type GEQ[T <: CriteriaTag] = PredicateBinary.GEQ[T]
 
-  type LEQ[T <: CriteriaTag] = PredOp.LEQ[T]
+  type LEQ[T <: CriteriaTag] = PredicateBinary.LEQ[T]
 
-  type LIKE[T <: CriteriaTag] = PredOp.LIKE[T]
+  type LIKE[T <: CriteriaTag] = PredicateBinary.LIKE[T]
 
-  type IN[T <: CriteriaTag] = PredOp.IN[T]
+  type IN[T <: CriteriaTag] = PredicateBinary.IN[T]
 
-  type NOTIN[T <: CriteriaTag] = PredOp.NOTIN[T]
+  type NOTIN[T <: CriteriaTag] = PredicateBinary.NOTIN[T]
 
-  type ISNULL[T <: CriteriaTag] = PredOp.ISNULL[T]
+  type ISNULL[T <: CriteriaTag] = PredicateUnary.ISNULL[T]
 
-  type ISNOTNULL[T <: CriteriaTag] = PredOp.ISNOTNULL[T]
+  type ISNOTNULL[T <: CriteriaTag] = PredicateUnary.ISNOTNULL[T]
 
-  type BETWEEN[T <: CriteriaTag] = PredOp.BETWEEN[T]
+  type BETWEEN[T <: CriteriaTag] = PredicateBinary.BETWEEN[T]
 
-  type NOTBETWEEN[T <: CriteriaTag] = PredOp.NOTBETWEEN[T]
+  type NOTBETWEEN[T <: CriteriaTag] = PredicateBinary.NOTBETWEEN[T]
 
 }

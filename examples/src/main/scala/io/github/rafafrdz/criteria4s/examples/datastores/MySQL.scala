@@ -1,6 +1,6 @@
 package io.github.rafafrdz.criteria4s.examples.datastores
 
-import io.github.rafafrdz.criteria4s.core.PredOp._
+import io.github.rafafrdz.criteria4s.core.PredicateBinary._
 import io.github.rafafrdz.criteria4s.instances._
 import io.github.rafafrdz.criteria4s.sql._
 

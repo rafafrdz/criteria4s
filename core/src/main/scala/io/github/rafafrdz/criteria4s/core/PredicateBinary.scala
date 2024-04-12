@@ -3,37 +3,55 @@ package io.github.rafafrdz.criteria4s.core
 import io.github.rafafrdz.criteria4s.core.Criteria._
 import io.github.rafafrdz.criteria4s.instances.builder.{Builder1, Builder2}
 
-trait PredOp[T <: CriteriaTag] {
+trait Predicate[T <: CriteriaTag]
+
+trait PredicateUnary[T <: CriteriaTag] extends Predicate[T] {
+  def eval(ref: Ref[T]): Criteria[T]
+}
+
+trait PredicateBinary[T <: CriteriaTag] extends Predicate[T] {
   def eval(cr1: Ref[T], cr2: Ref[T]): Criteria[T]
 }
 
-object PredOp {
+object PredicateUnary {
+  trait ISNULL[T <: CriteriaTag] extends PredicateUnary[T]
 
-  trait GT[T <: CriteriaTag] extends PredOp[T]
+  trait ISNOTNULL[T <: CriteriaTag] extends PredicateUnary[T]
 
-  trait LT[T <: CriteriaTag] extends PredOp[T]
+  implicit val isnullBuilder: Builder1[ISNULL] = new Builder1[ISNULL] {
+    override def build[T <: CriteriaTag](F: String => String): ISNULL[T] =
+      (cr1: Ref[T]) => pure(F(cr1.ref.value))
+  }
 
-  trait EQ[T <: CriteriaTag] extends PredOp[T]
+  implicit val isnotnullBuilder: Builder1[ISNOTNULL] = new Builder1[ISNOTNULL] {
+    override def build[T <: CriteriaTag](F: String => String): ISNOTNULL[T] =
+      (cr1: Ref[T]) => pure(F(cr1.ref.value))
+  }
+}
 
-  trait NEQ[T <: CriteriaTag] extends PredOp[T]
+object PredicateBinary {
 
-  trait GEQ[T <: CriteriaTag] extends PredOp[T]
+  trait GT[T <: CriteriaTag] extends PredicateBinary[T]
 
-  trait LEQ[T <: CriteriaTag] extends PredOp[T]
+  trait LT[T <: CriteriaTag] extends PredicateBinary[T]
 
-  trait LIKE[T <: CriteriaTag] extends PredOp[T]
+  trait EQ[T <: CriteriaTag] extends PredicateBinary[T]
 
-  trait IN[T <: CriteriaTag] extends PredOp[T]
+  trait NEQ[T <: CriteriaTag] extends PredicateBinary[T]
 
-  trait NOTIN[T <: CriteriaTag] extends PredOp[T]
+  trait GEQ[T <: CriteriaTag] extends PredicateBinary[T]
 
-  trait ISNULL[T <: CriteriaTag] extends PredOp[T]
+  trait LEQ[T <: CriteriaTag] extends PredicateBinary[T]
 
-  trait ISNOTNULL[T <: CriteriaTag] extends PredOp[T]
+  trait LIKE[T <: CriteriaTag] extends PredicateBinary[T]
 
-  trait BETWEEN[T <: CriteriaTag] extends PredOp[T]
+  trait IN[T <: CriteriaTag] extends PredicateBinary[T]
 
-  trait NOTBETWEEN[T <: CriteriaTag] extends PredOp[T]
+  trait NOTIN[T <: CriteriaTag] extends PredicateBinary[T]
+
+  trait BETWEEN[T <: CriteriaTag] extends PredicateBinary[T]
+
+  trait NOTBETWEEN[T <: CriteriaTag] extends PredicateBinary[T]
 
   implicit val gtBuilder: Builder2[GT] = new Builder2[GT] {
     override def build[T <: CriteriaTag](F: (String, String) => String): GT[T] =
@@ -78,16 +96,6 @@ object PredOp {
   implicit val notinBuilder: Builder2[NOTIN] = new Builder2[NOTIN] {
     override def build[T <: CriteriaTag](F: (String, String) => String): NOTIN[T] =
       (cr1: Ref[T], cr2: Ref[T]) => pure(F(cr1.ref.value, cr2.ref.value))
-  }
-
-  implicit val isnullBuilder: Builder1[ISNULL] = new Builder1[ISNULL] {
-    override def build[T <: CriteriaTag](F: String => String): ISNULL[T] =
-      (cr1: Ref[T], _: Ref[T]) => pure(F(cr1.ref.value))
-  }
-
-  implicit val isnotnullBuilder: Builder1[ISNOTNULL] = new Builder1[ISNOTNULL] {
-    override def build[T <: CriteriaTag](F: String => String): ISNOTNULL[T] =
-      (cr1: Ref[T], _: Ref[T]) => pure(F(cr1.ref.value))
   }
 
   implicit val betweenBuilder: Builder2[BETWEEN] = new Builder2[BETWEEN] {

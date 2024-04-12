@@ -1,7 +1,8 @@
 package io.github.rafafrdz.criteria4s.extensions
 
 import io.github.rafafrdz.criteria4s.core.Criteria.CriteriaTag
-import io.github.rafafrdz.criteria4s.core.PredOp._
+import io.github.rafafrdz.criteria4s.core.PredicateBinary._
+import io.github.rafafrdz.criteria4s.core.PredicateUnary._
 import io.github.rafafrdz.criteria4s.core.{Criteria, Ref}
 import io.github.rafafrdz.criteria4s.{functions => F}
 

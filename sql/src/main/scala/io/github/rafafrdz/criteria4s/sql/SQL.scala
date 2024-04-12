@@ -1,7 +1,8 @@
 package io.github.rafafrdz.criteria4s.sql
 
 import io.github.rafafrdz.criteria4s.core.ConjOp._
-import io.github.rafafrdz.criteria4s.core.PredOp._
+import io.github.rafafrdz.criteria4s.core.PredicateBinary._
+import io.github.rafafrdz.criteria4s.core.PredicateUnary._
 import io.github.rafafrdz.criteria4s.core.{CriteriaTag, Sym}
 import io.github.rafafrdz.criteria4s.instances._
 

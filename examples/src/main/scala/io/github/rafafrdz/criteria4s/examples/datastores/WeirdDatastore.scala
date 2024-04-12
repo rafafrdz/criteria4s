@@ -2,7 +2,8 @@ package io.github.rafafrdz.criteria4s.examples.datastores
 
 import io.github.rafafrdz.criteria4s.core.ConjOp._
 import io.github.rafafrdz.criteria4s.core.Criteria.CriteriaTag
-import io.github.rafafrdz.criteria4s.core.PredOp._
+import io.github.rafafrdz.criteria4s.core.PredicateBinary._
+import io.github.rafafrdz.criteria4s.core.PredicateUnary._
 import io.github.rafafrdz.criteria4s.core.Sym
 import io.github.rafafrdz.criteria4s.instances._
 
