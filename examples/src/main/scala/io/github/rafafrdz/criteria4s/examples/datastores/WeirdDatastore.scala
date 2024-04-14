@@ -4,7 +4,8 @@ import io.github.rafafrdz.criteria4s.core.ConjOp._
 import io.github.rafafrdz.criteria4s.core.Criteria.CriteriaTag
 import io.github.rafafrdz.criteria4s.core.PredicateBinary._
 import io.github.rafafrdz.criteria4s.core.PredicateUnary._
-import io.github.rafafrdz.criteria4s.core.Sym
+import io.github.rafafrdz.criteria4s.core.Show
+import io.github.rafafrdz.criteria4s.core.Show.ShowColumn
 import io.github.rafafrdz.criteria4s.instances._
 
 trait WeirdDatastore extends CriteriaTag
@@ -16,6 +17,8 @@ object WeirdDatastore {
 
   private def wope1(symbol: String)(left: String): String =
     s"""{left: $left, opt: $symbol }""".stripMargin
+
+  implicit val showColumn: ShowColumn[WeirdDatastore] = Show.create(_.colName)
 
   implicit val ltPred: LT[WeirdDatastore] = build[WeirdDatastore, LT](wope("<"))
 
@@ -50,6 +53,6 @@ object WeirdDatastore {
   implicit val notbetweenPred: NOTBETWEEN[WeirdDatastore] =
     build[WeirdDatastore, NOTBETWEEN](wope("NOT BETWEEN"))
 
-  implicit val symRef: Sym[WeirdDatastore] = sym0[WeirdDatastore]
+//  implicit val symRef: Sym[WeirdDatastore] = sym0[WeirdDatastore]
 
 }

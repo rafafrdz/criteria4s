@@ -5,13 +5,16 @@ import io.github.rafafrdz.criteria4s.core._
 
 package object functions extends predicates with conjunctions {
 
-  def predBinary[T <: CriteriaTag, H <: PredicateBinary[T]](cr1: Ref[T], cr2: Ref[T])(
-      implicit H: H
+  def predBinary[T <: CriteriaTag, H <: PredicateBinary[T], L, R](cr1: Ref[T, L], cr2: Ref[T, R])(
+      implicit H: H,
+      showL: Show[L, T],
+      showR: Show[R, T]
   ): Criteria[T] =
     H.eval(cr1, cr2)
 
-  def predUnary[T <: CriteriaTag, H <: PredicateUnary[T]](ref: Ref[T])(
-      implicit H: H
+  def predUnary[T <: CriteriaTag, H <: PredicateUnary[T], V](ref: Ref[T, V])(
+      implicit H: H,
+      show: Show[V, T]
   ): Criteria[T] =
     H.eval(ref)
 

@@ -1,43 +1,39 @@
 package io.github.rafafrdz.criteria4s.core
 
-sealed trait Ref[D <: CriteriaTag] {
-  def ref: Criteria[D]
+import io.github.rafafrdz.criteria4s.core.Show.ShowColumn
 
-  override def toString: String = ref.value
+sealed trait Ref[D <: CriteriaTag, +V] {
+  def asString(implicit show: Show[V, D]): String
 }
 
 object Ref {
 
-  trait Value[+V, D <: CriteriaTag] extends Ref[D]
+  trait Value[D <: CriteriaTag, +V] extends Ref[D, V]
 
-  trait Collection[V, D <: CriteriaTag] extends Value[Seq[V], D]
+  trait Collection[D <: CriteriaTag, +V] extends Ref[D, Seq[V]]
 
-  trait Col[D <: CriteriaTag] extends Ref[D]
+  trait Col[D <: CriteriaTag] extends Ref[D, Column]
 
-  trait Bool[D <: CriteriaTag] extends Value[Boolean, D] with Criteria[D] {
-    self =>
+  trait Bool[D <: CriteriaTag] extends Value[D, Boolean] with Criteria[D]
 
-    override def value: String = ref.value
+  private[criteria4s] def nothing[T <: CriteriaTag]: Value[T, Nothing] =
+    (_: Show[Nothing, T]) => ""
 
-    override def toString: String = value
-  }
+  private[criteria4s] def value[V, D <: CriteriaTag](v: V): Value[D, V] =
+    (show: Show[V, D]) => show.show(v)
 
-  private[criteria4s] def nothing[T <: CriteriaTag]: Value[Nothing, T] =
-    new Value[Nothing, T] {
-      override def ref: Criteria[T] = Criteria.pure("")
-    }
-  private[criteria4s] def value[V, D <: CriteriaTag](v: V): Value[V, D] =
-    new Value[V, D] {
-      override def ref: Criteria[D] = Criteria.pure(v.toString)
-    }
-
-  private[criteria4s] def col[D <: CriteriaTag](v: String): Col[D] = new Col[D] {
-    override def ref: Criteria[D] = Criteria.pure(v)
-  }
+  private[criteria4s] def col[D <: CriteriaTag](v: Column): Col[D] =
+    (show: ShowColumn[D]) => show.show(v)
 
   private[criteria4s] def bool[D <: CriteriaTag](v: Boolean): Bool[D] =
     new Bool[D] {
-      override def ref: Criteria[D] = Criteria.pure(v.toString)
+      override def value: String                                     = v.toString
+      override def asString(implicit show: Show[Boolean, D]): String = v.toString
     }
 
+  private[criteria4s] def array[V, D <: CriteriaTag](vs: V*): Collection[D, V] =
+    (show: Show[Seq[V], D]) => show.show(vs)
+
 }
+
+class Column(val colName: String) extends AnyVal
