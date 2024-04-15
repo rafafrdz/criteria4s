@@ -53,6 +53,4 @@ object WeirdDatastore {
   implicit val notbetweenPred: NOTBETWEEN[WeirdDatastore] =
     build[WeirdDatastore, NOTBETWEEN](wope("NOT BETWEEN"))
 
-//  implicit val symRef: Sym[WeirdDatastore] = sym0[WeirdDatastore]
-
 }
