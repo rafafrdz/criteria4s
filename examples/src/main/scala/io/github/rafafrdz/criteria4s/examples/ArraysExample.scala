@@ -9,15 +9,23 @@ object ArraysExample extends App {
   def aIsNullAlgebra[
       T <: CriteriaTag: ISNULL: ({ type A[D <: CriteriaTag] = Show[Column, D] })#A
   ]: Criteria[T] = isNull(col("a"))
+
   val numberInArray: Criteria[Postgres] = in(col("a"), array(1, 2, 3))
+  def numberInArrayAlgebra[T <: CriteriaTag: IN: ({ type A[D <: CriteriaTag] = Show[Column, D] })#A: ({ type A[D <: CriteriaTag] = Show[Seq[Int], D] })#A]: Criteria[T] =
+    in(col("a"), array(1, 2, 3))
+
   val combined: Criteria[Postgres]      = or(aIsNull, numberInArray)
   val moreCombined: Criteria[Postgres]  = or(combined, ===(col("b"), lit(10)))
+
 
   println(aIsNull)
   println(aIsNullAlgebra[Postgres])
   println(aIsNullAlgebra[WeirdDatastore])
 
   println(numberInArray)
+  println(numberInArrayAlgebra[Postgres])
+  println(numberInArrayAlgebra[WeirdDatastore])
+
   println(combined)
   println(moreCombined)
 }

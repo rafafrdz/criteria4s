@@ -18,12 +18,10 @@ private[functions] trait predicates {
 
   def col[T <: CriteriaTag](ref: String): Col[T] = Ref.col(new Column(ref))
 
-  def array[T <: CriteriaTag, V](vs: V*): Collection[T, V] = Ref.array(vs:_*)
+  def array[T <: CriteriaTag, V](vs: V*): Collection[T, V] = Ref.array(vs: _*)
 
-//  private def array_[T <: CriteriaTag: ARRAY](values: Criteria[T]*): Criteria[T] = pred[T, ARRAY[T]](values: _*)
-//
-//  def array[T <: CriteriaTag: ARRAY, V](values: V*): Criteria[T] = array_(values.map(lit[T, V]): _*)
-//
+  def range[T <: CriteriaTag, V](left: V, right: V): Ref.Range[T, V] = Ref.range(left, right)
+
   def lt[T <: CriteriaTag: LT, L, R](cr1: Ref[T, L], cr2: Ref[T, R])(implicit
       showL: Show[L, T],
       showR: Show[R, T]
@@ -78,7 +76,7 @@ private[functions] trait predicates {
   ): Criteria[T] =
     predBinary[T, IN[T], L, R](cr1, cr2)
 
-  def notin[T <: CriteriaTag: NOTIN, L, R](cr1: Ref[T, L], cr2: Ref[T, R])(implicit
+  def notIn[T <: CriteriaTag: NOTIN, L, R](cr1: Ref[T, L], cr2: Ref[T, R])(implicit
       showL: Show[L, T],
       showR: Show[R, T]
   ): Criteria[T] =

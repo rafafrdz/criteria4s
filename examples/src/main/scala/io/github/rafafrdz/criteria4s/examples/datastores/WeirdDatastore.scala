@@ -18,6 +18,12 @@ object WeirdDatastore {
   private def wope1(symbol: String)(left: String): String =
     s"""{left: $left, opt: $symbol }""".stripMargin
 
+  implicit def showSeq[V](implicit show: Show[V, WeirdDatastore]): Show[Seq[V], WeirdDatastore] =
+    Show.create(_.map(show.show).mkString("[", ", ", "]"))
+
+  implicit def showRange[V](implicit show: Show[V, WeirdDatastore]): Show[(V, V), WeirdDatastore] =
+    Show.create { case (l, r) => s"[${show.show(l)}, ${show.show(r)}]" }
+
   implicit val showColumn: ShowColumn[WeirdDatastore] = Show.create(_.colName)
 
   implicit val ltPred: LT[WeirdDatastore] = build[WeirdDatastore, LT](wope("<"))

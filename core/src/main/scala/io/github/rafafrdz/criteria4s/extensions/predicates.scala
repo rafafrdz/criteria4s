@@ -42,20 +42,20 @@ trait predicates {
 
     def notIn[R](
         other: Collection[T, R]
-    )(implicit H: NOTIN[T], showL: Show[L, T], showR: Show[Seq[R], T]): Criteria[T] = F.notin(c, other)
+    )(implicit H: NOTIN[T], showL: Show[L, T], showR: Show[Seq[R], T]): Criteria[T] = F.notIn(c, other)
 
     def isNull(implicit H: ISNULL[T], show: Show[L, T]): Criteria[T] = F.isNull(c)
 
     def isNotNull(implicit H: ISNOTNULL[T], show: Show[L, T]): Criteria[T] = F.isNotNull(c)
 
     def between[R](
-        other: Ref[T, R]
-    )(implicit H: BETWEEN[T], showL: Show[L, T], showR: Show[R, T]): Criteria[T] =
+        other: Ref.Range[T, R]
+    )(implicit H: BETWEEN[T], showL: Show[L, T], showR: Show[(R, R), T]): Criteria[T] =
       F.between(c, other)
 
     def notBetween[R](
-        other: Ref[T, R]
-    )(implicit H: NOTBETWEEN[T], showL: Show[L, T], showR: Show[R, T]): Criteria[T] =
+        other: Ref.Range[T, R]
+    )(implicit H: NOTBETWEEN[T], showL: Show[L, T], showR: Show[(R, R), T]): Criteria[T] =
       F.notBetween(c, other)
   }
 
