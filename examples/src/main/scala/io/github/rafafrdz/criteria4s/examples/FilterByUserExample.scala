@@ -9,7 +9,7 @@ import java.util.UUID
 
 object FilterByUserExample extends App {
 
-  def expr[T <: CriteriaTag: EQ: ({type A[D <: CriteriaTag] = Show[Column, D]})#A](fieldName: String, id: UUID): Criteria[T] =
+  def expr[T <: CriteriaTag: EQ: Show[Column, *]](fieldName: String, id: UUID): Criteria[T] =
     col[T](fieldName) === lit(id.toString)
 
   println {

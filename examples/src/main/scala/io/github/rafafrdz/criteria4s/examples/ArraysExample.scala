@@ -7,16 +7,15 @@ import io.github.rafafrdz.criteria4s.functions._
 object ArraysExample extends App {
   val aIsNull: Criteria[Postgres] = isNull(col("a"))
   def aIsNullAlgebra[
-      T <: CriteriaTag: ISNULL: ({ type A[D <: CriteriaTag] = Show[Column, D] })#A
+      T <: CriteriaTag: ISNULL: Show[Column, *]
   ]: Criteria[T] = isNull(col("a"))
 
   val numberInArray: Criteria[Postgres] = in(col("a"), array(1, 2, 3))
-  def numberInArrayAlgebra[T <: CriteriaTag: IN: ({ type A[D <: CriteriaTag] = Show[Column, D] })#A: ({ type A[D <: CriteriaTag] = Show[Seq[Int], D] })#A]: Criteria[T] =
+  def numberInArrayAlgebra[T <: CriteriaTag: IN: Show[Column, *]: Show[Seq[Int], *]]: Criteria[T] =
     in(col("a"), array(1, 2, 3))
 
-  val combined: Criteria[Postgres]      = or(aIsNull, numberInArray)
-  val moreCombined: Criteria[Postgres]  = or(combined, ===(col("b"), lit(10)))
-
+  val combined: Criteria[Postgres]     = or(aIsNull, numberInArray)
+  val moreCombined: Criteria[Postgres] = or(combined, ===(col("b"), lit(10)))
 
   println(aIsNull)
   println(aIsNullAlgebra[Postgres])

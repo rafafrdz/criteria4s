@@ -1,3 +1,5 @@
+import Dependencies.ProjectOps
+
 lazy val criteria4s: Project =
   project
     .in(file("."))
@@ -28,3 +30,4 @@ lazy val examples: Project =
       name := "criteria4s-examples"
     )
     .dependsOn(core, sql)
+    .withKindProjector

@@ -1,9 +1,9 @@
 package io.github.rafafrdz.criteria4s.extensions
 
 import io.github.rafafrdz.criteria4s.core.Criteria.CriteriaTag
-import io.github.rafafrdz.criteria4s.core.Ref.Collection
 import io.github.rafafrdz.criteria4s.core.PredicateBinary._
 import io.github.rafafrdz.criteria4s.core.PredicateUnary._
+import io.github.rafafrdz.criteria4s.core.Ref.Collection
 import io.github.rafafrdz.criteria4s.core.{Criteria, Ref, Show}
 import io.github.rafafrdz.criteria4s.{functions => F}
 
@@ -42,7 +42,8 @@ trait predicates {
 
     def notIn[R](
         other: Collection[T, R]
-    )(implicit H: NOTIN[T], showL: Show[L, T], showR: Show[Seq[R], T]): Criteria[T] = F.notIn(c, other)
+    )(implicit H: NOTIN[T], showL: Show[L, T], showR: Show[Seq[R], T]): Criteria[T] =
+      F.notIn(c, other)
 
     def isNull(implicit H: ISNULL[T], show: Show[L, T]): Criteria[T] = F.isNull(c)
 

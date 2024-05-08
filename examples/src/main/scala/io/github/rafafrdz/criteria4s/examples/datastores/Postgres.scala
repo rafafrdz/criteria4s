@@ -16,8 +16,4 @@ object Postgres extends SQLExpr[Postgres] {
     Show.create(_.map(show.show).mkString("(", ", ", ")"))
   implicit def betweenShow[T](implicit show: Show[T, Postgres]): Show[(T, T), Postgres] =
     Show.create { case (l, r) => s"${show.show(l)} TO ${show.show(r)}" }
-
-//  val C: String => String                     = s => s"`$s`"
-//  val V: String => String                     = s => s"'$s'"
-//  override implicit val symRef: Sym[Postgres] = sym[Postgres](C, V)
 }

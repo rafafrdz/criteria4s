@@ -11,19 +11,23 @@ extensible to support any kind of data stores.
 The formal definition of the Criteria4s' type-classes (expressions) is as follows:
 
 ```text
-Criteria    :=  ConjOp Criteria Criteria | PredOp Ref Ref | Value<Boolean>
-Ref         :=  Value<T> | Col
-ConjOp      :=  AND | OR
-PredOp      :=  EQ | NEQ | GT | LT | GEQ | LEQ | IN | LIKE | IS_NULL | IS_NOT_NULL ...
+Criteria     :=  ConjOp Criteria Criteria | RefExpr | Value<Boolean>
+ConjOp       :=  AND | OR
+RefExpr      :=  UnPredOp Ref | BinPredOp Ref Ref | RefColOp Ref Collection<V> | RefRangeOp Ref Range<V> | RegexOp Ref Value<String>
+Ref          :=  Value<T> | Col
+UnPredOp     :=  IS_NULL | IS_NOT_NULL
+BinPredOp    :=  EQ | NEQ | GT | LT | GEQ | LEQ
+RefColOp     :=  IN | NOTIN
+RefRangeOp   :=  BETWEEN | NOTBETWEEN
+RegexOp      :=  LIKE
 ```
 
 Where:
 
 - `Criteria` is the main expression of the DSL
-- `ConjOp` is the conjunction operator expression
-- `PredOp` is the predicate operator expression
-- `Ref` is a reference to a value or a column
 - `Value<T>` is a value expression of a certain type `T`
+- `Collection<V>` is a collection expression of a certain type `T` (used in `LIKE` operation)
+- `Range<V>` is a range expression of type `T` (used in `BETWEEN`/`NOTBETWEEN`ops)
 - `Col` is a column expression
 
 ## Getting Started

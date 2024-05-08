@@ -1,3 +1,4 @@
+
 package io.github.rafafrdz.criteria4s.functions
 
 import io.github.rafafrdz.criteria4s.core.Criteria.CriteriaTag

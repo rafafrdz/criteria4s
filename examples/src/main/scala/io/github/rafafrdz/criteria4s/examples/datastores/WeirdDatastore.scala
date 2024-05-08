@@ -4,8 +4,7 @@ import io.github.rafafrdz.criteria4s.core.ConjOp._
 import io.github.rafafrdz.criteria4s.core.Criteria.CriteriaTag
 import io.github.rafafrdz.criteria4s.core.PredicateBinary._
 import io.github.rafafrdz.criteria4s.core.PredicateUnary._
-import io.github.rafafrdz.criteria4s.core.Show
-import io.github.rafafrdz.criteria4s.core.Show.ShowColumn
+import io.github.rafafrdz.criteria4s.core.{Column, Show}
 import io.github.rafafrdz.criteria4s.instances._
 
 trait WeirdDatastore extends CriteriaTag
@@ -24,7 +23,7 @@ object WeirdDatastore {
   implicit def showRange[V](implicit show: Show[V, WeirdDatastore]): Show[(V, V), WeirdDatastore] =
     Show.create { case (l, r) => s"[${show.show(l)}, ${show.show(r)}]" }
 
-  implicit val showColumn: ShowColumn[WeirdDatastore] = Show.create(_.colName)
+  implicit val showColumn: Show[Column, WeirdDatastore] = Show.create(_.colName)
 
   implicit val ltPred: LT[WeirdDatastore] = build[WeirdDatastore, LT](wope("<"))
 

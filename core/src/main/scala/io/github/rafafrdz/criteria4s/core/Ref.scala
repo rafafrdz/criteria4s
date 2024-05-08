@@ -1,7 +1,5 @@
 package io.github.rafafrdz.criteria4s.core
 
-import io.github.rafafrdz.criteria4s.core.Show.ShowColumn
-
 sealed trait Ref[D <: CriteriaTag, +V] {
   def asString(implicit show: Show[V, D]): String
 }
@@ -21,7 +19,7 @@ object Ref {
     (show: Show[V, D]) => show.show(v)
 
   private[criteria4s] def col[D <: CriteriaTag](v: Column): Col[D] =
-    (show: ShowColumn[D]) => show.show(v)
+    (show: Show[Column, D]) => show.show(v)
 
   private[criteria4s] def bool[D <: CriteriaTag](v: Boolean): Bool[D] =
     new Bool[D] {

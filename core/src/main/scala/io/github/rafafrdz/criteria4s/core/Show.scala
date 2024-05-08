@@ -5,14 +5,8 @@ trait Show[-V, D <: CriteriaTag] {
 }
 
 object Show {
-  def create[D <: CriteriaTag]: ShowBuilder[D] = new ShowBuilder[D]
+  def create[V, D <: CriteriaTag](f: V => String): Show[V, D] = (v: V) => f(v)
 
-  private[core] final class ShowBuilder[D <: CriteriaTag] {
-    def apply[V](f: V => String): Show[V, D] = (v: V) => f(v)
-  }
-
-  type ShowColumn[D <: CriteriaTag] = Show[Column, D]
-
-  implicit def defaultStringShow[D <: CriteriaTag]: Show[String, D] = identity
-  implicit def defaultIntShow[D <: CriteriaTag]: Show[Int, D] = create(_.toString)
+  implicit def defaultStringShow[D <: CriteriaTag]: Show[String, D]      = identity
+  implicit def defaultIntShow[V <: AnyVal, D <: CriteriaTag]: Show[V, D] = create(_.toString)
 }

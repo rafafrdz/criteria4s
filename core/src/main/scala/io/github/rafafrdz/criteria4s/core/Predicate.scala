@@ -3,7 +3,7 @@ package io.github.rafafrdz.criteria4s.core
 import io.github.rafafrdz.criteria4s.core.Criteria._
 import io.github.rafafrdz.criteria4s.instances.builder.{Builder1, Builder2}
 
-trait Predicate[T <: CriteriaTag]
+sealed trait Predicate[T <: CriteriaTag]
 
 trait PredicateUnary[T <: CriteriaTag] extends Predicate[T] {
   def eval[V](ref: Ref[T, V])(implicit show: Show[V, T]): Criteria[T]
@@ -21,7 +21,7 @@ object PredicateUnary {
 
   trait ISNOTNULL[T <: CriteriaTag] extends PredicateUnary[T]
 
-  implicit val isnullBuilder: Builder1[ISNULL] = new Builder1[ISNULL] {
+  implicit val isNullBuilder: Builder1[ISNULL] = new Builder1[ISNULL] {
     override def build[T <: CriteriaTag](F: String => String): ISNULL[T] = new ISNULL[T] {
       override def eval[V](ref: Ref[T, V])(implicit show: Show[V, T]): Criteria[T] = pure(
         F(ref.asString)
@@ -29,7 +29,7 @@ object PredicateUnary {
     }
   }
 
-  implicit val isnotnullBuilder: Builder1[ISNOTNULL] = new Builder1[ISNOTNULL] {
+  implicit val isNotNullBuilder: Builder1[ISNOTNULL] = new Builder1[ISNOTNULL] {
     override def build[T <: CriteriaTag](F: String => String): ISNOTNULL[T] = new ISNOTNULL[T] {
       override def eval[V](ref: Ref[T, V])(implicit show: Show[V, T]): Criteria[T] = pure(
         F(ref.asString)
@@ -137,12 +137,13 @@ object PredicateBinary {
   }
 
   implicit val notinBuilder: Builder2[NOTIN] = new Builder2[NOTIN] {
-    override def build[T <: CriteriaTag](F: (String, String) => String): NOTIN[T] = new NOTIN[T] {
-      override def eval[L, R](cr1: Ref[T, L], cr2: Ref[T, R])(implicit
-          showL: Show[L, T],
-          showR: Show[R, T]
-      ): Criteria[T] = pure(F(cr1.asString, cr2.asString))
-    }
+    override def build[T <: CriteriaTag](F: (String, String) => String): NOTIN[T] =
+      new NOTIN[T] {
+        override def eval[L, R](cr1: Ref[T, L], cr2: Ref[T, R])(implicit
+            showL: Show[L, T],
+            showR: Show[R, T]
+        ): Criteria[T] = pure(F(cr1.asString, cr2.asString))
+      }
   }
 
   implicit val betweenBuilder: Builder2[BETWEEN] = new Builder2[BETWEEN] {
@@ -164,5 +165,4 @@ object PredicateBinary {
         ): Criteria[T] = pure(F(cr1.asString, cr2.asString))
       }
   }
-
 }
