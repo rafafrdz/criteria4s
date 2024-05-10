@@ -11,23 +11,22 @@ extensible to support any kind of data stores.
 The formal definition of the Criteria4s' type-classes (expressions) is as follows:
 
 ```text
-Criteria     :=  ConjOp Criteria Criteria | RefExpr | Value<Boolean>
-ConjOp       :=  AND | OR
-RefExpr      :=  UnPredOp Ref | BinPredOp Ref Ref | RefColOp Ref Collection<V> | RefRangeOp Ref Range<V> | RegexOp Ref Value<String>
-Ref          :=  Value<T> | Col
-UnPredOp     :=  IS_NULL | IS_NOT_NULL
-BinPredOp    :=  EQ | NEQ | GT | LT | GEQ | LEQ
-RefColOp     :=  IN | NOTIN
-RefRangeOp   :=  BETWEEN | NOTBETWEEN
-RegexOp      :=  LIKE
+Criteria    :=  Conjuction Criteria Criteria | Predicate | Value<Boolean>
+Predicate   :=  UnaryPred Ref | BinaryPred Ref Ref
+Ref         :=  Value<T> | Col
+Conjuction  :=  AND | OR
+UnaryPred   :=  IS_NULL | IS_NOT_NULL ...
+BinaryPred  :=  EQ | NEQ | GT | LT | GEQ | LEQ | IN | LIKE ...
 ```
 
 Where:
 
 - `Criteria` is the main expression of the DSL
+- `ConjOp` is the conjunction operator expression
+- `UnaryPredOp` is the unary predicate operator expression
+- `BinaryPredOp` is the binary predicate operator expression
+- `Ref` is a reference to a value or a column
 - `Value<T>` is a value expression of a certain type `T`
-- `Collection<V>` is a collection expression of a certain type `T` (used in `LIKE` operation)
-- `Range<V>` is a range expression of type `T` (used in `BETWEEN`/`NOTBETWEEN`ops)
 - `Col` is a column expression
 
 ## Getting Started
@@ -109,4 +108,4 @@ Or maybe we can use the Criteria DSL inline:
 ```
 
 You can find more examples in
-the [`criteria4s-examples`](./examples/src/main/scala/io/github/rafafrdz/criteria/examples) module.
+the [`criteria4s-examples`](./examples/src/main/scala/io/github/rafafrdz/criteria4s/examples) module.

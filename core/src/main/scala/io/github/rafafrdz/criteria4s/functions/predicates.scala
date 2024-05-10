@@ -1,11 +1,10 @@
-
 package io.github.rafafrdz.criteria4s.functions
 
 import io.github.rafafrdz.criteria4s.core.Criteria.CriteriaTag
-import io.github.rafafrdz.criteria4s.core.Ref.{Bool, Col, Collection, Value}
-import io.github.rafafrdz.criteria4s.core.{Column, Criteria, Ref, Show}
 import io.github.rafafrdz.criteria4s.core.PredicateBinary._
 import io.github.rafafrdz.criteria4s.core.PredicateUnary._
+import io.github.rafafrdz.criteria4s.core.Ref.{Bool, Col, Collection, Value}
+import io.github.rafafrdz.criteria4s.core.{Column, Criteria, Ref, Show}
 
 private[functions] trait predicates {
 
@@ -17,7 +16,7 @@ private[functions] trait predicates {
 
   private[criteria4s] def __[T <: CriteriaTag]: Value[T, Nothing] = Ref.nothing[T]
 
-  def col[T <: CriteriaTag](ref: String): Col[T] = Ref.col(new Column(ref))
+  def col[T <: CriteriaTag](ref: String): Col[T] = Ref.col(Column(ref))
 
   def array[T <: CriteriaTag, V](vs: V*): Collection[T, V] = Ref.array(vs: _*)
 

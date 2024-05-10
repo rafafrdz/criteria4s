@@ -1,16 +1,16 @@
 package io.github.rafafrdz.criteria4s.core
 
-sealed trait Ref[D <: CriteriaTag, +V] {
+sealed trait Ref[D <: CriteriaTag, V] {
   def asString(implicit show: Show[V, D]): String
 }
 
 object Ref {
 
-  trait Value[D <: CriteriaTag, +V]      extends Ref[D, V]
-  trait Collection[D <: CriteriaTag, +V] extends Ref[D, Seq[V]]
-  trait Col[D <: CriteriaTag]            extends Ref[D, Column]
-  trait Bool[D <: CriteriaTag]           extends Value[D, Boolean] with Criteria[D]
-  trait Range[D <: CriteriaTag, +V]      extends Ref[D, (V, V)]
+  trait Value[D <: CriteriaTag, V]      extends Ref[D, V]
+  trait Collection[D <: CriteriaTag, V] extends Ref[D, Seq[V]]
+  trait Col[D <: CriteriaTag]           extends Ref[D, Column]
+  trait Bool[D <: CriteriaTag]          extends Value[D, Boolean] with Criteria[D]
+  trait Range[D <: CriteriaTag, V]      extends Ref[D, (V, V)]
 
   private[criteria4s] def nothing[T <: CriteriaTag]: Value[T, Nothing] =
     (_: Show[Nothing, T]) => ""
@@ -35,4 +35,4 @@ object Ref {
 
 }
 
-class Column(val colName: String) extends AnyVal
+case class Column(colName: String) extends AnyVal
