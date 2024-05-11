@@ -1,7 +1,6 @@
 package io.github.rafafrdz.criteria4s.examples.datastores
 
-import io.github.rafafrdz.criteria4s.core._
-import io.github.rafafrdz.criteria4s.instances._
+import io.github.rafafrdz.criteria4s.core.{Column, Show}
 import io.github.rafafrdz.criteria4s.sql.{SQL, _}
 
 trait Postgres  extends SQL
@@ -12,7 +11,9 @@ object Postgres extends SQLExpr[Postgres] {
    * default implementation
    */
 
-  val C: String => String                     = s => s"`$s`"
-  val V: String => String                     = s => s"'$s'"
-  override implicit val symRef: Sym[Postgres] = sym[Postgres](C, V)
+  implicit val showColumn: Show[Column, Postgres] = Show.create(col => s"'${col.colName}'")
+  implicit def showSeq[T](implicit show: Show[T, Postgres]): Show[Seq[T], Postgres] =
+    Show.create(_.map(show.show).mkString("(", ", ", ")"))
+  implicit def betweenShow[T](implicit show: Show[T, Postgres]): Show[(T, T), Postgres] =
+    Show.create { case (l, r) => s"${show.show(l)} TO ${show.show(r)}" }
 }

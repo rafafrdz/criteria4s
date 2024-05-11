@@ -1,8 +1,9 @@
 package io.github.rafafrdz.criteria4s.sql
 
 import io.github.rafafrdz.criteria4s.core.ConjOp._
-import io.github.rafafrdz.criteria4s.core.PredOp._
-import io.github.rafafrdz.criteria4s.core.{CriteriaTag, Sym}
+import io.github.rafafrdz.criteria4s.core.PredicateBinary._
+import io.github.rafafrdz.criteria4s.core.PredicateUnary._
+import io.github.rafafrdz.criteria4s.core.{Column, CriteriaTag, Show}
 import io.github.rafafrdz.criteria4s.instances._
 
 trait SQL extends CriteriaTag
@@ -13,14 +14,14 @@ object SQL {
   private def opExpr(symbol: String)(a: String, b: String): String   = s"($a) $symbol ($b)"
   private def predExpr1(symbol: String)(a: String): String           = s"$a $symbol"
 
+  implicit val showColumn: Show[Column, SQL] = Show.create(col => s"'${col.colName}'")
+
   trait SQLExpr[T <: SQL] {
 
     protected def predExpr(symbol: String)(a: String, b: String): String =
       SQL.predExpr(symbol)(a, b)
     protected def opExpr(symbol: String)(a: String, b: String): String = SQL.opExpr(symbol)(a, b)
     protected def predExpr1(symbol: String)(a: String): String         = SQL.predExpr1(symbol)(a)
-
-    implicit val symRef: Sym[T] = sym[T](v => v, c => s"'$c'")
 
     implicit val ltPred: LT[T] = build[T, LT](predExpr("<"))
 

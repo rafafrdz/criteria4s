@@ -7,12 +7,12 @@ import io.github.rafafrdz.criteria4s.functions._
 
 object Example4 extends App {
 
-  def expr[T <: CriteriaTag: LEQ: EQ: AND: OR: Sym]: Criteria[T] =
+  def expr[T <: CriteriaTag: LEQ: EQ: AND: OR: Show[Column, *]]: Criteria[T] =
     (col[T]("a") leq lit(3)) and
       (col[T]("b") leq lit(4)) or
       (col[T]("c") === lit("c"))
 
-  def inlineExpr[T <: CriteriaTag: LEQ: EQ: AND: OR: Sym]: Criteria[T] =
+  def inlineExpr[T <: CriteriaTag: LEQ: EQ: AND: OR: Show[Column, *]]: Criteria[T] =
     (col[T]("a") leq lit(3)) and (col[T]("b") leq lit(4)) or (col[T]("c") === lit("c"))
 
   println {
