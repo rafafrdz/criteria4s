@@ -22,7 +22,7 @@ BinaryPred  :=  EQ | NEQ | GT | LT | GEQ | LEQ | IN | LIKE ...
 Where:
 
 - `Criteria` is the main expression of the DSL
-- `ConjOp` is the conjunction operator expression
+- `Conjuction` is the conjunction operator expression
 - `UnaryPredOp` is the unary predicate operator expression
 - `BinaryPredOp` is the binary predicate operator expression
 - `Ref` is a reference to a value or a column
@@ -52,14 +52,14 @@ libraryDependencies += "io.github.rafafrdz" %% "criteria4s-sql" % "<version>" //
 <dependency>
     <groupId>io.github.rafafrdz</groupId>
     <artifactId>criteria4s-core_2.13</artifactId>
-    <version>0.7.0</version>
+    <version>0.8.0</version>
 </dependency>
 
 <!-- SQL implementation -->
 <dependency>
     <groupId>io.github.rafafrdz</groupId>
     <artifactId>criteria4s-core_2.13</artifactId>
-    <version>0.7.0</version>
+    <version>0.8.0</version>
 </dependency>
 ```
 
