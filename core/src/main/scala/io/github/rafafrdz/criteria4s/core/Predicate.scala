@@ -1,7 +1,7 @@
 package io.github.rafafrdz.criteria4s.core
 
 import io.github.rafafrdz.criteria4s.core.Criteria._
-import io.github.rafafrdz.criteria4s.instances.builder.{Builder1, Builder2}
+import io.github.rafafrdz.criteria4s.instances.builder.{BuilderUnary, BuilderBinary}
 
 sealed trait Predicate[T <: CriteriaTag]
 
@@ -21,7 +21,7 @@ object PredicateUnary {
 
   trait ISNOTNULL[T <: CriteriaTag] extends PredicateUnary[T]
 
-  implicit val isNullBuilder: Builder1[ISNULL] = new Builder1[ISNULL] {
+  implicit val isNullBuilder: BuilderUnary[ISNULL] = new BuilderUnary[ISNULL] {
     override def build[T <: CriteriaTag](F: String => String): ISNULL[T] = new ISNULL[T] {
       override def eval[V](ref: Ref[T, V])(implicit show: Show[V, T]): Criteria[T] = pure(
         F(ref.asString)
@@ -29,7 +29,7 @@ object PredicateUnary {
     }
   }
 
-  implicit val isNotNullBuilder: Builder1[ISNOTNULL] = new Builder1[ISNOTNULL] {
+  implicit val isNotNullBuilder: BuilderUnary[ISNOTNULL] = new BuilderUnary[ISNOTNULL] {
     override def build[T <: CriteriaTag](F: String => String): ISNOTNULL[T] = new ISNOTNULL[T] {
       override def eval[V](ref: Ref[T, V])(implicit show: Show[V, T]): Criteria[T] = pure(
         F(ref.asString)
@@ -62,7 +62,7 @@ object PredicateBinary {
 
   trait NOTBETWEEN[T <: CriteriaTag] extends PredicateBinary[T]
 
-  implicit val gtBuilder: Builder2[GT] = new Builder2[GT] {
+  implicit val gtBuilder: BuilderBinary[GT] = new BuilderBinary[GT] {
     override def build[T <: CriteriaTag](
         F: (String, String) => String
     ): GT[T] = new GT[T] {
@@ -73,7 +73,7 @@ object PredicateBinary {
     }
   }
 
-  implicit val ltBuilder: Builder2[LT] = new Builder2[LT] {
+  implicit val ltBuilder: BuilderBinary[LT] = new BuilderBinary[LT] {
     override def build[T <: CriteriaTag](F: (String, String) => String): LT[T] = new LT[T] {
       override def eval[L, R](cr1: Ref[T, L], cr2: Ref[T, R])(implicit
           showL: Show[L, T],
@@ -82,7 +82,7 @@ object PredicateBinary {
     }
   }
 
-  implicit val eqBuilder: Builder2[EQ] = new Builder2[EQ] {
+  implicit val eqBuilder: BuilderBinary[EQ] = new BuilderBinary[EQ] {
     override def build[T <: CriteriaTag](F: (String, String) => String): EQ[T] = new EQ[T] {
       override def eval[L, R](cr1: Ref[T, L], cr2: Ref[T, R])(implicit
           showL: Show[L, T],
@@ -91,7 +91,7 @@ object PredicateBinary {
     }
   }
 
-  implicit val neqBuilder: Builder2[NEQ] = new Builder2[NEQ] {
+  implicit val neqBuilder: BuilderBinary[NEQ] = new BuilderBinary[NEQ] {
     override def build[T <: CriteriaTag](F: (String, String) => String): NEQ[T] = new NEQ[T] {
       override def eval[L, R](cr1: Ref[T, L], cr2: Ref[T, R])(implicit
           showL: Show[L, T],
@@ -100,7 +100,7 @@ object PredicateBinary {
     }
   }
 
-  implicit val geqBuilder: Builder2[GEQ] = new Builder2[GEQ] {
+  implicit val geqBuilder: BuilderBinary[GEQ] = new BuilderBinary[GEQ] {
     override def build[T <: CriteriaTag](F: (String, String) => String): GEQ[T] = new GEQ[T] {
       override def eval[L, R](cr1: Ref[T, L], cr2: Ref[T, R])(implicit
           showL: Show[L, T],
@@ -109,7 +109,7 @@ object PredicateBinary {
     }
   }
 
-  implicit val leqBuilder: Builder2[LEQ] = new Builder2[LEQ] {
+  implicit val leqBuilder: BuilderBinary[LEQ] = new BuilderBinary[LEQ] {
     override def build[T <: CriteriaTag](F: (String, String) => String): LEQ[T] = new LEQ[T] {
       override def eval[L, R](cr1: Ref[T, L], cr2: Ref[T, R])(implicit
           showL: Show[L, T],
@@ -118,7 +118,7 @@ object PredicateBinary {
     }
   }
 
-  implicit val likeBuilder: Builder2[LIKE] = new Builder2[LIKE] {
+  implicit val likeBuilder: BuilderBinary[LIKE] = new BuilderBinary[LIKE] {
     override def build[T <: CriteriaTag](F: (String, String) => String): LIKE[T] = new LIKE[T] {
       override def eval[L, R](cr1: Ref[T, L], cr2: Ref[T, R])(implicit
           showL: Show[L, T],
@@ -127,7 +127,7 @@ object PredicateBinary {
     }
   }
 
-  implicit val inBuilder: Builder2[IN] = new Builder2[IN] {
+  implicit val inBuilder: BuilderBinary[IN] = new BuilderBinary[IN] {
     override def build[T <: CriteriaTag](F: (String, String) => String): IN[T] = new IN[T] {
       override def eval[L, R](cr1: Ref[T, L], cr2: Ref[T, R])(implicit
           showL: Show[L, T],
@@ -136,7 +136,7 @@ object PredicateBinary {
     }
   }
 
-  implicit val notinBuilder: Builder2[NOTIN] = new Builder2[NOTIN] {
+  implicit val notinBuilder: BuilderBinary[NOTIN] = new BuilderBinary[NOTIN] {
     override def build[T <: CriteriaTag](F: (String, String) => String): NOTIN[T] =
       new NOTIN[T] {
         override def eval[L, R](cr1: Ref[T, L], cr2: Ref[T, R])(implicit
@@ -146,7 +146,7 @@ object PredicateBinary {
       }
   }
 
-  implicit val betweenBuilder: Builder2[BETWEEN] = new Builder2[BETWEEN] {
+  implicit val betweenBuilder: BuilderBinary[BETWEEN] = new BuilderBinary[BETWEEN] {
     override def build[T <: CriteriaTag](F: (String, String) => String): BETWEEN[T] =
       new BETWEEN[T] {
         override def eval[L, R](cr1: Ref[T, L], cr2: Ref[T, R])(implicit
@@ -156,7 +156,7 @@ object PredicateBinary {
       }
   }
 
-  implicit val notbetweenBuilder: Builder2[NOTBETWEEN] = new Builder2[NOTBETWEEN] {
+  implicit val notbetweenBuilder: BuilderBinary[NOTBETWEEN] = new BuilderBinary[NOTBETWEEN] {
     override def build[T <: CriteriaTag](F: (String, String) => String): NOTBETWEEN[T] =
       new NOTBETWEEN[T] {
         override def eval[L, R](cr1: Ref[T, L], cr2: Ref[T, R])(implicit

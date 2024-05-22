@@ -1,11 +1,10 @@
 package io.github.rafafrdz.criteria4s.extensions
 
-import io.github.rafafrdz.criteria4s.core.Criteria.CriteriaTag
+import io.github.rafafrdz.criteria4s.{functions => F}
+import io.github.rafafrdz.criteria4s.core.{Criteria, CriteriaTag, Ref, Show}
 import io.github.rafafrdz.criteria4s.core.PredicateBinary._
 import io.github.rafafrdz.criteria4s.core.PredicateUnary._
 import io.github.rafafrdz.criteria4s.core.Ref.Collection
-import io.github.rafafrdz.criteria4s.core.{Criteria, Ref, Show}
-import io.github.rafafrdz.criteria4s.{functions => F}
 
 trait predicates {
 

@@ -12,5 +12,5 @@ object Criteria {
 
     override def value: String = v
   }
-  trait CriteriaTag
+  private [core] trait CriteriaTag
 }
