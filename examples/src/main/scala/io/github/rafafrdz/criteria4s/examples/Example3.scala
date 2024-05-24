@@ -3,6 +3,7 @@ package io.github.rafafrdz.criteria4s.examples
 import io.github.rafafrdz.criteria4s.core._
 import io.github.rafafrdz.criteria4s.examples.datastores.{Postgres, WeirdDatastore}
 import io.github.rafafrdz.criteria4s.functions._
+import io.github.rafafrdz.criteria4s.mongodb._
 
 object Example3 extends App {
 
@@ -30,6 +31,12 @@ object Example3 extends App {
        |example1[WeirdDatastore]: ${example1[WeirdDatastore]}
        |
        |example2[WeirdDatastore]: ${example2[WeirdDatastore]}
+       |
+       |Examples for MongoDb instances
+       |
+       |example1[MongoDb]: ${example1[MongoDb]}
+       |
+       |example2[MongoDb]: ${example2[MongoDb]}
        |""".stripMargin
   }
 }

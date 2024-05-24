@@ -37,5 +37,5 @@ lazy val examples: Project =
     .settings(
       name := "criteria4s-examples"
     )
-    .dependsOn(core, sql)
+    .dependsOn(core, sql, mongodb)
     .withKindProjector
