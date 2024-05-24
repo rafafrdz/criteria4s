@@ -1,4 +1,4 @@
-![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/io.github.rafafrdz/criteria4s-core_2.13?server=https%3A%2F%2Fs01.oss.sonatype.org&style=flat-square&label=Sonatype&labelColor=%20&color=%2acf45%20%20) [![License](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square&label=License)](https://raw.githubusercontent.com/47degrees/github4s/master/LICENSE)
+![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/io.github.rafafrdz/criteria4s-core_2.13?server=https%3A%2F%2Fs01.oss.sonatype.org&style=flat-square&label=Sonatype&labelColor=%20&color=%2acf45%20%20) [![License](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square&label=License)](https://github.com/rafafrdz/criteria4s?tab=Apache-2.0-1-ov-file#readme)
 
 # Criteria4s
 
@@ -22,7 +22,7 @@ BinaryPred  :=  EQ | NEQ | GT | LT | GEQ | LEQ | IN | LIKE ...
 Where:
 
 - `Criteria` is the main expression of the DSL
-- `ConjOp` is the conjunction operator expression
+- `Conjuction` is the conjunction operator expression
 - `UnaryPredOp` is the unary predicate operator expression
 - `BinaryPredOp` is the binary predicate operator expression
 - `Ref` is a reference to a value or a column
@@ -52,14 +52,14 @@ libraryDependencies += "io.github.rafafrdz" %% "criteria4s-sql" % "<version>" //
 <dependency>
     <groupId>io.github.rafafrdz</groupId>
     <artifactId>criteria4s-core_2.13</artifactId>
-    <version>0.7.0</version>
+    <version>0.8.0</version>
 </dependency>
 
 <!-- SQL implementation -->
 <dependency>
     <groupId>io.github.rafafrdz</groupId>
     <artifactId>criteria4s-core_2.13</artifactId>
-    <version>0.7.0</version>
+    <version>0.8.0</version>
 </dependency>
 ```
 

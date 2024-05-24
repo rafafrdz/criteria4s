@@ -1,8 +1,7 @@
 package io.github.rafafrdz.criteria4s.functions
 
-import io.github.rafafrdz.criteria4s.core.Criteria
-import io.github.rafafrdz.criteria4s.core.Criteria.CriteriaTag
-import io.github.rafafrdz.criteria4s.core.ConjOp._
+import io.github.rafafrdz.criteria4s.core.{Criteria, CriteriaTag}
+import io.github.rafafrdz.criteria4s.core.Conjuction._
 
 private[functions] trait conjunctions {
 
