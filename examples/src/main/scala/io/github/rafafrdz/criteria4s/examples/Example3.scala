@@ -32,11 +32,11 @@ object Example3 extends App {
        |
        |example2[WeirdDatastore]: ${example2[WeirdDatastore]}
        |
-       |Examples for MongoDb instances
+       |Examples for MongoDB instances
        |
-       |example1[MongoDb]: ${example1[MongoDb]}
+       |example1[MongoDB]: ${example1[MongoDB]}
        |
-       |example2[MongoDb]: ${example2[MongoDb]}
+       |example2[MongoDB]: ${example2[MongoDB]}
        |""".stripMargin
   }
 }

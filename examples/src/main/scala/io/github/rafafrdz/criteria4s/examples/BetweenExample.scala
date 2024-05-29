@@ -4,7 +4,7 @@ import io.github.rafafrdz.criteria4s.core._
 import io.github.rafafrdz.criteria4s.examples.datastores.{Postgres, WeirdDatastore}
 import io.github.rafafrdz.criteria4s.extensions._
 import io.github.rafafrdz.criteria4s.functions._
-import io.github.rafafrdz.criteria4s.mongodb.MongoDb
+import io.github.rafafrdz.criteria4s.mongodb.MongoDB
 
 object BetweenExample extends App {
   val simpleBetween: Criteria[Postgres]    = col[Postgres]("a").between(range(1, 10))
@@ -19,5 +19,5 @@ object BetweenExample extends App {
   println(simpleNotBetween)
   println(taglessFinalBetweenExample[Postgres])
   println(taglessFinalBetweenExample[WeirdDatastore])
-  println(taglessFinalBetweenExample[MongoDb])
+  println(taglessFinalBetweenExample[MongoDB])
 }

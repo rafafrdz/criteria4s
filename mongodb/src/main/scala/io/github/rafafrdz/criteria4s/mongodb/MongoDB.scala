@@ -6,9 +6,9 @@ import io.github.rafafrdz.criteria4s.core.PredicateBinary._
 import io.github.rafafrdz.criteria4s.core.PredicateUnary._
 import io.github.rafafrdz.criteria4s.instances._
 
-trait MongoDb extends CriteriaTag
+trait MongoDB extends CriteriaTag
 
-object MongoDb {
+object MongoDB {
   private def binaryPredExpr(symbol: String): (String, String) => String =
     (left, right) => s"{$left: {$$$symbol: $right}}"
 
@@ -27,13 +27,13 @@ object MongoDb {
   private val betweenExample: (String, String) => String =
     (ref, range) => s"{$ref: $range}"
 
-  implicit val showColumn: Show[Column, MongoDb] = Show.create(col => s"\"${col.colName}\"")
-  implicit def showSeq[T](implicit show: Show[T, MongoDb]): Show[Seq[T], MongoDb] =
+  implicit val showColumn: Show[Column, MongoDB] = Show.create(col => s"\"${col.colName}\"")
+  implicit def showSeq[T](implicit show: Show[T, MongoDB]): Show[Seq[T], MongoDB] =
     Show.create(_.map(show.show).mkString("[", ", ", "]"))
-  implicit def betweenShow[T](implicit show: Show[T, MongoDb]): Show[(T, T), MongoDb] =
+  implicit def betweenShow[T](implicit show: Show[T, MongoDB]): Show[(T, T), MongoDB] =
     Show.create { case (l, r) => s"{ $$gte: ${show.show(l)}, $$lt: ${show.show(r)} }" }
 
-  trait MongoDbExpr[T <: MongoDb] {
+  trait MongoDBExpr[T <: MongoDB] {
     implicit val ltPred: LT[T]               = build[T, LT](binaryPredExpr("lt"))
     implicit val gtPred: GT[T]               = build[T, GT](binaryPredExpr("gt"))
     implicit val orOp: OR[T]                 = build[T, OR](opExpr("or"))
