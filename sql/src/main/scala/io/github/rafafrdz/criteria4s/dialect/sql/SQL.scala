@@ -1,4 +1,4 @@
-package io.github.rafafrdz.criteria4s.sql
+package io.github.rafafrdz.criteria4s.dialect.sql
 
 import io.github.rafafrdz.criteria4s.core.Conjuction._
 import io.github.rafafrdz.criteria4s.core.PredicateBinary._
