@@ -3,7 +3,7 @@ package io.github.rafafrdz.criteria4s.examples.datastores
 import io.github.rafafrdz.criteria4s.core.PredicateBinary._
 import io.github.rafafrdz.criteria4s.core.{Column, Show}
 import io.github.rafafrdz.criteria4s.instances._
-import io.github.rafafrdz.criteria4s.sql._
+import io.github.rafafrdz.criteria4s.dialect.sql._
 
 trait MySQL extends SQL
 
