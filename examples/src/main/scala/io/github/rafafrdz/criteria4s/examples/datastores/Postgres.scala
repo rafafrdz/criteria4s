@@ -1,7 +1,7 @@
 package io.github.rafafrdz.criteria4s.examples.datastores
 
 import io.github.rafafrdz.criteria4s.core.{Column, Show}
-import io.github.rafafrdz.criteria4s.sql.{SQL, _}
+import io.github.rafafrdz.criteria4s.dialect.sql.{SQL, _}
 
 trait Postgres  extends SQL
 object Postgres extends SQLExpr[Postgres] {

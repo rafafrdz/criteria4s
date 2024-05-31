@@ -66,6 +66,16 @@ libraryDependencies += "io.github.rafafrdz" %% "criteria4s-sql" % "<version>" //
 > [!IMPORTANT]  
 > Criteria4s is a work in progress and it is not ready for production use. Also, it is just available for Scala 2.13.
 
+## Dialects
+
+Criteria4s is extensible to support any kind of data stores. Currently, it supports the following **dialects**:
+
+| Dialect     | Package                                                                                    | Example |
+|-------------|:-------------------------------------------------------------------------------------------|:--------|
+| SQL         | [sql](./sql/src/main/scala/io/github/rafafrdz/criteria4s/dialect/sql)                      | -       |
+| MongoDB     | [mongodb](./mongodb/src/main/scala/io/github/rafafrdz/criteria4s/dialect/mongodb)          | -       |
+| PostgresSQL | [postgresql](./postgresql/src/main/scala/io/github/rafafrdz/criteria4s/dialect/postgresql) | -       |
+
 ## Examples
 
 Here, we will show some examples of how to use the Criteria DSL.
