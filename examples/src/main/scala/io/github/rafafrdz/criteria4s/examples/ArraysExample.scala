@@ -1,9 +1,9 @@
 package io.github.rafafrdz.criteria4s.examples
 
 import io.github.rafafrdz.criteria4s.core._
+import io.github.rafafrdz.criteria4s.dialect.mongodb.MongoDB
 import io.github.rafafrdz.criteria4s.examples.datastores.{Postgres, WeirdDatastore}
 import io.github.rafafrdz.criteria4s.functions._
-import io.github.rafafrdz.criteria4s.mongodb.MongoDB
 
 object ArraysExample extends App {
   val aIsNull: Criteria[Postgres] = isNull(col("a"))

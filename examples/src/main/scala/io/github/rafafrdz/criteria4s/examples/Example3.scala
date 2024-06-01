@@ -1,13 +1,13 @@
 package io.github.rafafrdz.criteria4s.examples
 
 import io.github.rafafrdz.criteria4s.core._
+import io.github.rafafrdz.criteria4s.dialect.mongodb.MongoDB
 import io.github.rafafrdz.criteria4s.examples.datastores.{Postgres, WeirdDatastore}
 import io.github.rafafrdz.criteria4s.functions._
-import io.github.rafafrdz.criteria4s.mongodb._
 
 object Example3 extends App {
 
-  def example1[T <: CriteriaTag: LT: AND: OR : Show[Column, *]]: Criteria[T] =
+  def example1[T <: CriteriaTag: LT: AND: OR: Show[Column, *]]: Criteria[T] =
     or(and(lt(col("a"), lit(3)), lt(col("b"), lit(4))), bool(true))
 
   def example2[T <: CriteriaTag: LT: AND: OR: GEQ: ISNULL: NEQ: Show[Column, *]]: Criteria[T] =

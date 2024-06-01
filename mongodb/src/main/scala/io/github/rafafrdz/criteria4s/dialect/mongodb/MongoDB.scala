@@ -1,4 +1,4 @@
-package io.github.rafafrdz.criteria4s.mongodb
+package io.github.rafafrdz.criteria4s.dialect.mongodb
 
 import io.github.rafafrdz.criteria4s.core.Conjuction.{AND, OR}
 import io.github.rafafrdz.criteria4s.core.{Column, CriteriaTag, Show}
