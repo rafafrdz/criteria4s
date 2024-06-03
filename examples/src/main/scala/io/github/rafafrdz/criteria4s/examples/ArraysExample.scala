@@ -1,6 +1,7 @@
 package io.github.rafafrdz.criteria4s.examples
 
 import io.github.rafafrdz.criteria4s.core._
+import io.github.rafafrdz.criteria4s.dialect.mongodb.MongoDB
 import io.github.rafafrdz.criteria4s.examples.datastores.{Postgres, WeirdDatastore}
 import io.github.rafafrdz.criteria4s.functions._
 
@@ -20,10 +21,12 @@ object ArraysExample extends App {
   println(aIsNull)
   println(aIsNullAlgebra[Postgres])
   println(aIsNullAlgebra[WeirdDatastore])
+  println(aIsNullAlgebra[MongoDB])
 
   println(numberInArray)
   println(numberInArrayAlgebra[Postgres])
   println(numberInArrayAlgebra[WeirdDatastore])
+  println(numberInArrayAlgebra[MongoDB])
 
   println(combined)
   println(moreCombined)

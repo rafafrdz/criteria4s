@@ -1,6 +1,7 @@
 package io.github.rafafrdz.criteria4s.examples
 
 import io.github.rafafrdz.criteria4s.core._
+import io.github.rafafrdz.criteria4s.dialect.mongodb.MongoDB
 import io.github.rafafrdz.criteria4s.examples.datastores.{Postgres, WeirdDatastore}
 import io.github.rafafrdz.criteria4s.extensions._
 import io.github.rafafrdz.criteria4s.functions._
@@ -18,4 +19,5 @@ object BetweenExample extends App {
   println(simpleNotBetween)
   println(taglessFinalBetweenExample[Postgres])
   println(taglessFinalBetweenExample[WeirdDatastore])
+  println(taglessFinalBetweenExample[MongoDB])
 }

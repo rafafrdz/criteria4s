@@ -4,7 +4,7 @@ lazy val criteria4s: Project =
   project
     .in(file("."))
     .disablePlugins(AssemblyPlugin)
-    .aggregate(core, sql, examples)
+    .aggregate(core, sql, mongodb, examples)
     .settings(
       name := "criteria4s"
     )
@@ -24,10 +24,18 @@ lazy val sql: Project =
     )
     .dependsOn(core)
 
+lazy val mongodb: Project =
+  (project in file("mongodb"))
+    .settings(
+      name := "criteria4s-mongodb",
+      publish / skip := false
+    )
+    .dependsOn(core)
+
 lazy val examples: Project =
   (project in file("examples"))
     .settings(
       name := "criteria4s-examples"
     )
-    .dependsOn(core, sql)
+    .dependsOn(core, sql, mongodb)
     .withKindProjector
