@@ -1,7 +1,7 @@
 package io.github.rafafrdz.criteria4s.core
 
 import io.github.rafafrdz.criteria4s.core.Criteria._
-import io.github.rafafrdz.criteria4s.instances.builder.{BuilderUnary, BuilderBinary}
+import io.github.rafafrdz.criteria4s.instances.builder.{BuilderBinary, BuilderUnary}
 
 sealed trait Predicate[T <: CriteriaTag]
 

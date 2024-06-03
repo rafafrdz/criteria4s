@@ -1,6 +1,5 @@
 package io.github.rafafrdz.criteria4s.core
 
-
 trait Criteria[T <: CriteriaTag] {
   def value: String
 
@@ -12,5 +11,5 @@ object Criteria {
 
     override def value: String = v
   }
-  private [core] trait CriteriaTag
+  private[core] trait CriteriaTag
 }

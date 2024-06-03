@@ -27,3 +27,4 @@ changelog:
     - title: '📚 Docs'
       labels:
         - 'doc'
+        - 'documentation'

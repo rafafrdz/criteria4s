@@ -28,6 +28,7 @@ categories:
   - title: '📚 Docs'
     labels:
       - 'doc'
+      - 'documentation'
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 
 template: |
@@ -36,9 +37,12 @@ template: |
   **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
 
 autolabeler:
-  - label: 'doc'
+  - label: 'documentation'
     files:
       - '*.md'
+    title:
+      - '/doc/i'
+      - '/documentation/i'
   - label: 'bug'
     title:
       - '/fix/i'
