@@ -17,7 +17,7 @@ ThisBuild / developers := List(
   Developer(
     id = "rafafrdz",
     name = "Rafael Fernández Ortiz",
-    email = "rafaelfernandezortiz@gmail.com",
+    email = "criteria4s@rafaelfernandez.dev",
     url = url("https://github.com/rafafrdz")
   )
 )
@@ -35,6 +35,6 @@ ThisBuild / sonatypeProjectHosting := Some(
   GitHubHosting(
     user = "rafafrdz",
     repository = "criteria4s",
-    email = "rafaelfernandezortiz@gmail.com"
+    email = "criteria4s@rafaelfernandez.dev"
   )
 )
