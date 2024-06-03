@@ -24,7 +24,7 @@ object Build extends AutoPlugin {
       ThisBuild / organization       := "io.github.rafafrdz",
       ThisBuild / name               := "criteria-dsl",
       ThisBuild / scalaVersion       := Version.Scala,
-      ThisBuild / crossScalaVersions := Vector(scalaVersion.value),
+      ThisBuild / crossScalaVersions := Vector(ScalaCross.ScalaVersions: _*),
       ThisBuild / javacOptions       := Seq("-g:none"),
       ThisBuild / run / javaOptions ++= localJvmSettings,
       ThisBuild / run / fork  := true,
