@@ -4,9 +4,11 @@ package object core {
 
   type CriteriaTag = Criteria.CriteriaTag
 
-  type AND[T <: CriteriaTag] = Conjuction.AND[T]
+  type AND[T <: CriteriaTag] = ConjuctionBinary.AND[T]
 
-  type OR[T <: CriteriaTag] = Conjuction.OR[T]
+  type OR[T <: CriteriaTag] = ConjuctionBinary.OR[T]
+
+  type NOT[T <: CriteriaTag] = ConjuctionUnary.NOT[T]
 
   type GT[T <: CriteriaTag] = PredicateBinary.GT[T]
 
