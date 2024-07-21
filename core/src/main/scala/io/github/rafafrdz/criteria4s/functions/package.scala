@@ -17,9 +17,14 @@ package object functions extends predicates with conjunctions {
   ): Criteria[T] =
     H.eval(ref)
 
-  def cond[T <: CriteriaTag, H <: Conjuction[T]](cr1: Criteria[T], cr2: Criteria[T])(implicit
+  def cond[T <: CriteriaTag, H <: ConjuctionBinary[T]](cr1: Criteria[T], cr2: Criteria[T])(implicit
       H: H
   ): Criteria[T] =
     H.eval(cr1, cr2)
+
+  def cond[T <: CriteriaTag, H <: ConjuctionUnary[T]](cr: Criteria[T])(implicit
+      H: H
+  ): Criteria[T] =
+    H.eval(cr)
 
 }
