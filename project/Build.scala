@@ -24,7 +24,7 @@ object Build extends AutoPlugin {
       ThisBuild / organization       := "io.github.rafafrdz",
       ThisBuild / name               := "criteria-dsl",
       ThisBuild / scalaVersion       := Version.Scala,
-      ThisBuild / crossScalaVersions := Vector(ScalaCross.ScalaVersions: _*),
+      ThisBuild / crossScalaVersions := Vector(scalaVersion.value),
       ThisBuild / javacOptions       := Seq("-g:none"),
       ThisBuild / run / javaOptions ++= localJvmSettings,
       ThisBuild / run / fork  := true,
@@ -78,6 +78,7 @@ object Build extends AutoPlugin {
         "-Ywarn-unused:patvars",  // Warn if a variable bound in a pattern is unused.
         "-Ywarn-unused:privates", // Warn if a private member is unused.
         "-Ywarn-macros:after",
+        "-Ymacro-annotations"
       ),
       // note that the REPL can’t really cope with -Ywarn-unused:imports or -Xfatal-warnings so you should turn them off for the console
       Compile / console / scalacOptions ~= (_.filterNot(
