@@ -22,3 +22,6 @@ jobs:
 
       - name: Check scalafmt
         run: sbt scalafmtCheckAll
+
+      - name: Check build
+        run: sbt clean compile test doc
