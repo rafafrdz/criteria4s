@@ -37,30 +37,43 @@ To use dsl of Criteria4s, you need to add the following dependency to your proje
 
 - Core library: [criteria4s-core](https://central.sonatype.com/artifact/io.github.rafafrdz/criteria4s-core_2.13)
 - SQL implementation: [criteria4s-sql](https://central.sonatype.com/artifact/io.github.rafafrdz/criteria4s-sql_2.13)
+- MongoDB dialect
+  implementation: [criteria4s-mongodb](https://central.sonatype.com/artifact/io.github.rafafrdz/criteria4s-mongodb_2.13)
 
 **SBT**
 
 ```scala
 libraryDependencies += "io.github.rafafrdz" %% "criteria4s-core" % "<version>" // Core library
 libraryDependencies += "io.github.rafafrdz" %% "criteria4s-sql" % "<version>" // SQL implementation
+libraryDependencies += "io.github.rafafrdz" %% "criteria4s-mongodb" % "<version>" // MongoDB implementation
+
 ```
 
 **Maven**
 
 ```xml
 <!-- Core library -->
-<dependency>
-    <groupId>io.github.rafafrdz</groupId>
-    <artifactId>criteria4s-core_2.13</artifactId>
-    <version>0.8.0</version>
-</dependency>
+<dependencies>
+    <dependency>
+        <groupId>io.github.rafafrdz</groupId>
+        <artifactId>criteria4s-core_2.13</artifactId>
+        <version>0.8.2</version>
+    </dependency>
 
-<!-- SQL implementation -->
-<dependency>
-    <groupId>io.github.rafafrdz</groupId>
-    <artifactId>criteria4s-core_2.13</artifactId>
-    <version>0.8.0</version>
-</dependency>
+    <!-- SQL implementation -->
+    <dependency>
+        <groupId>io.github.rafafrdz</groupId>
+        <artifactId>criteria4s-core_2.13</artifactId>
+        <version>0.8.2</version>
+    </dependency>
+
+    <!-- MongoDB implementation -->
+    <dependency>
+        <groupId>io.github.rafafrdz</groupId>
+        <artifactId>criteria4s-mongodb_2.13</artifactId>
+        <version>0.8.2</version>
+    </dependency>
+</dependencies>
 ```
 
 > [!IMPORTANT]  
@@ -70,52 +83,75 @@ libraryDependencies += "io.github.rafafrdz" %% "criteria4s-sql" % "<version>" //
 
 Criteria4s is extensible to support any kind of data stores. Currently, it supports the following **dialects**:
 
-| Dialect     | Package                                                                                    | Example |
-|-------------|:-------------------------------------------------------------------------------------------|:--------|
-| SQL         | [sql](./sql/src/main/scala/io/github/rafafrdz/criteria4s/dialect/sql)                      | -       |
-| MongoDB     | [mongodb](./mongodb/src/main/scala/io/github/rafafrdz/criteria4s/dialect/mongodb)          | -       |
-| PostgresSQL | [postgresql](./postgresql/src/main/scala/io/github/rafafrdz/criteria4s/dialect/postgresql) | -       |
+| Dialect     | Package                                                                                    |
+|-------------|:-------------------------------------------------------------------------------------------|
+| SQL         | [sql](./sql/src/main/scala/io/github/rafafrdz/criteria4s/dialect/sql)                      | 
+| MongoDB     | [mongodb](./mongodb/src/main/scala/io/github/rafafrdz/criteria4s/dialect/mongodb)          | 
+| PostgresSQL | [postgresql](./postgresql/src/main/scala/io/github/rafafrdz/criteria4s/dialect/postgresql) |
 
 ## Examples
 
-Here, we will show some examples of how to use the Criteria DSL.
+Here, we will show some examples of how to use the Criteria DSL. You can find more examples in
+the [`criteria4s-examples`](./examples/src/main/scala/io/github/rafafrdz/criteria4s/examples) module.
+
+### Imports
+
+First, we need to import the Criteria4s DSL and the SQL dialect:
 
 ```scala
 import io.github.rafafrdz.criteria4s.core._
 import io.github.rafafrdz.criteria4s.examples.datastores._
 import io.github.rafafrdz.criteria4s.extensions._
 import io.github.rafafrdz.criteria4s.functions._
+```
 
-def ageCriteria[T <: CriteriaTag : GT : LT : AND : Sym]: Criteria[T] =
+### Defining Criteria Expressions
+
+We can define criteria expressions in a polymorphic way by using the Criteria DSL. You can find more definitions
+examples
+in the [`Defining Criteria Expressions`](./doc/defining-criteria-expressions.md) document.
+
+```scala
+def expr[T <: CriteriaTag : LEQ : EQ : AND : OR : Show[Column, *]]: Criteria[T] =
+  (col[T]("field1") leq lit(3)) and (col[T]("field2") leq lit(4)) or (col[T]("field3") === lit("c"))
+```
+
+#### Case of use
+
+```scala
+def ageCriteria[T <: CriteriaTag : GT : LT : AND : Show[Column, *]]: Criteria[T] =
   (col[T]("age") gt lit(18)) and (col[T]("age") lt lit(65))
 
-def expr[T <: CriteriaTag : LEQ : EQ : AND : OR : Sym]: Criteria[T] =
-  (col[T]("a") leq lit(3)) and (col[T]("b") leq lit(4)) or (col[T]("c") === lit("c"))
-
-def expr2[T <: CriteriaTag : EQ : Sym](fieldName: String, id: UUID): Criteria[T] =
+def refCriteria[T <: CriteriaTag : EQ : Show[Column, *]](fieldName: String, id: UUID): Criteria[T] =
   col[T](fieldName) === lit(id.toString)
 ```
 
-And then we can use the `ageCriteria`, `expr` and `expr2` functions to generate criteria expressions for different
-datastores:
+### Evaluating Criteria Expressions
 
-```scala
-ageCriteria[WeirdDatastore]
-// res: {left: {left: age, opt: >, right: 18 }, opt: AND, right: {left: age, opt: <, right: 65 } }
+And then we can use those expressions defined belows in order to generate criteria expressions for different
+datastores by importing the corresponding dialects. You can find evaluation examples for some different dialects in the
+following documents:
 
-expr[MySQL]
-// res: ((a <<< '3') AND (b <<< '4')) OR (c = 'c')
+- [PostgreSQL Dialect](./doc/postgresql-dialect-evaluating.md)
+- [MongoDB Dialect](./doc/mongodb-dialect-evaluating.md)
+- [MySQL Dialect](./doc/mysql-dialect-evaluating.md)
+- [Custom Dialect](./doc/custom-dialect-evaluating.md)
 
-expr2[Postgres]("USER_ID", UUID.randomUUID())
-// res: `USER_ID` = '07715cee-5d87-427d-99a7-cc03f2b5ef4a'
-```
+### Inline Criteria DSL
 
 Or maybe we can use the Criteria DSL inline:
 
 ```scala
-(col[WeirdDatastore]("a") leq lit(3)) and (col[WeirdDatastore]("b") leq lit(4)) or (col[WeirdDatastore]("c") === lit("c"))
-// res: {left: {left: {left: a, opt: <=, right: 3 }, opt: AND, right: {left: b, opt: <=, right: 4 } }, opt: OR, right: {left: c, opt: =, right: c } }
+(col[PostgreSQL]("field1") leq lit(3)) and (col[PostgreSQL]("field2") leq lit(4)) or (col[PostgreSQL]("field3") === lit("c"))
+// res: (('field1' <= 3) AND ('field2' <= 4)) OR ('field3' = c)
 ```
 
-You can find more examples in
-the [`criteria4s-examples`](./examples/src/main/scala/io/github/rafafrdz/criteria4s/examples) module.
+```scala
+(col[MongoDB]("field1") leq lit(3)) and (col[MongoDB]("field2") leq lit(4)) or (col[MongoDB]("field3") === lit("c"))
+// res: {$or: [{$and: [{"field1": {$lte: 3}}, {"field2": {$lte: 4}}]}, {"field3": {$eq: c}}]}
+```
+
+```scala
+(col[WeirdDatastore]("field1") leq lit(3)) and (col[WeirdDatastore]("field2") leq lit(4)) or (col[WeirdDatastore]("field3") === lit("c"))
+// res: {left: {left: {left: field1, opt: <=, right: 3 }, opt: AND, right: {left: field2, opt: <=, right: 4 } }, opt: OR, right: {left: field3, opt: =, right: c } }
+```
