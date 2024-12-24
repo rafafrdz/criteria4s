@@ -43,12 +43,12 @@ object Build extends AutoPlugin {
       headerLicense           := Some(headerIOLicense),
       ThisBuild / scalacOptions ++= Vector(
         "-release:8",
-        "-deprecation", // Emit warning and location for usages of deprecated APIs.
-        "-encoding",
+        "-deprecation", // Emit warnings for deprecated APIs
+        "-feature",     // Warn about features that should be imported explicitly
+        "-encoding", "UTF-8", // Specify encoding for source files
+        "-Xlint"  ,      // Enable recommended additional warnings
         "-Ymacro-annotations",
-        "utf-8",         // Specify character encoding used by source files.
         "-explaintypes", // Explain type errors in more detail.
-        "-feature", // Emit warning and location for usages of features that should be imported explicitly.
         "-language:existentials", // Existential types (besides wildcard types) can be written and inferred
         "-language:experimental.macros", // Allow macro definition (besides implementation and application)
         "-language:higherKinds",         // Allow higher-kinded types
