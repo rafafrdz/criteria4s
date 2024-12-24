@@ -1,4 +1,4 @@
-![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/io.github.rafafrdz/criteria4s-core_2.13?server=https%3A%2F%2Fs01.oss.sonatype.org&style=flat-square&label=Sonatype&labelColor=%20&color=%2acf45%20%20) [![License](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square&label=License)](https://github.com/rafafrdz/criteria4s?tab=Apache-2.0-1-ov-file#readme)
+![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/com.eff3ct/criteria4s-core_2.13?server=https%3A%2F%2Fs01.oss.sonatype.org&style=flat-square&label=Sonatype&labelColor=%20&color=%2acf45%20%20) [![License](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square&label=License)](https://github.com/rafafrdz/criteria4s?tab=Apache-2.0-1-ov-file#readme)
 
 # Criteria4s
 
@@ -35,17 +35,17 @@ To use dsl of Criteria4s, you need to add the following dependency to your proje
 
 **SonaType Repository**
 
-- Core library: [criteria4s-core](https://central.sonatype.com/artifact/io.github.rafafrdz/criteria4s-core_2.13)
-- SQL implementation: [criteria4s-sql](https://central.sonatype.com/artifact/io.github.rafafrdz/criteria4s-sql_2.13)
+- Core library: [criteria4s-core](https://central.sonatype.com/artifact/com.eff3ct/criteria4s-core_2.13)
+- SQL implementation: [criteria4s-sql](https://central.sonatype.com/artifact/com.eff3ct/criteria4s-sql_2.13)
 - MongoDB dialect
-  implementation: [criteria4s-mongodb](https://central.sonatype.com/artifact/io.github.rafafrdz/criteria4s-mongodb_2.13)
+  implementation: [criteria4s-mongodb](https://central.sonatype.com/artifact/com.eff3ct/criteria4s-mongodb_2.13)
 
 **SBT**
 
 ```scala
-libraryDependencies += "io.github.rafafrdz" %% "criteria4s-core" % "<version>" // Core library
-libraryDependencies += "io.github.rafafrdz" %% "criteria4s-sql" % "<version>" // SQL implementation
-libraryDependencies += "io.github.rafafrdz" %% "criteria4s-mongodb" % "<version>" // MongoDB implementation
+libraryDependencies += "com.eff3ct" %% "criteria4s-core" % "<version>" // Core library
+libraryDependencies += "com.eff3ct" %% "criteria4s-sql" % "<version>" // SQL implementation
+libraryDependencies += "com.eff3ct" %% "criteria4s-mongodb" % "<version>" // MongoDB implementation
 
 ```
 
@@ -55,21 +55,21 @@ libraryDependencies += "io.github.rafafrdz" %% "criteria4s-mongodb" % "<version>
 <!-- Core library -->
 <dependencies>
     <dependency>
-        <groupId>io.github.rafafrdz</groupId>
+        <groupId>com.eff3ct</groupId>
         <artifactId>criteria4s-core_2.13</artifactId>
         <version>0.8.2</version>
     </dependency>
 
     <!-- SQL implementation -->
     <dependency>
-        <groupId>io.github.rafafrdz</groupId>
+        <groupId>com.eff3ct</groupId>
         <artifactId>criteria4s-core_2.13</artifactId>
         <version>0.8.2</version>
     </dependency>
 
     <!-- MongoDB implementation -->
     <dependency>
-        <groupId>io.github.rafafrdz</groupId>
+        <groupId>com.eff3ct</groupId>
         <artifactId>criteria4s-mongodb_2.13</artifactId>
         <version>0.8.2</version>
     </dependency>
@@ -99,10 +99,10 @@ the [`criteria4s-examples`](./examples/src/main/scala/io/github/rafafrdz/criteri
 First, we need to import the Criteria4s DSL and the SQL dialect:
 
 ```scala
-import io.github.rafafrdz.criteria4s.core._
-import io.github.rafafrdz.criteria4s.examples.datastores._
-import io.github.rafafrdz.criteria4s.extensions._
-import io.github.rafafrdz.criteria4s.functions._
+import com.eff3ct.criteria4s.core._
+import com.eff3ct.criteria4s.examples.datastores._
+import com.eff3ct.criteria4s.extensions._
+import com.eff3ct.criteria4s.functions._
 ```
 
 ### Defining Criteria Expressions
