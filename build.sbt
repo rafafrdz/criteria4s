@@ -3,7 +3,7 @@ import Dependencies.ProjectOps
 lazy val criteria4s: Project =
   project
     .in(file("."))
-    .disablePlugins(AssemblyPlugin)
+    .disablePlugins(Build, AssemblyPlugin, HeaderPlugin)
     .aggregate(core, sql, mongodb, examples)
     .settings(
       name := "criteria4s"
